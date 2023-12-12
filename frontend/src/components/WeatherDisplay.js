@@ -4,9 +4,15 @@ export function WeatherDisplay({ weatherData }) {
   console.log(weatherData);
 
   return (
-    <div className="flex justify-between">
-      <div className="flex">
-        <img src="https://openweathermap.org/img/wn/02d@4x.png" alt="weather" />
+    <div className="flex justify-between text-foreground">
+      <div className="flex items-center">
+        <img
+          src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
+          alt="weather"
+          width={200}
+          height={200}
+          className="object-cover"
+        />
         <div className="flex flex-col">
           <h2 className="text-5xl font-bold">London, UK</h2>
           <h2 className="text-5xl font-bold">Few Clouds</h2>

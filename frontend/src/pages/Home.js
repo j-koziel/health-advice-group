@@ -4,35 +4,25 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 export function Home() {
-  const { userLat, setUserLat } = useState(0);
-  const { userLon, setUserLon } = useState(0);
+  const [weatherData, setWeatherData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition((position) => {
-      setUserLat(position.coords.latitude);
-      setUserLon(position.coords.longitude);
-    });
-  });
-
-  const { status, weatherData, error, isFetching } = useQuery(
-    ["data"],
-    async () => {
-      const data = await axios
+      const data = axios
         .get(
-          `https://api.openweathermap.org/data/3.0/onecall?lat=${userLat}&lon=${userLon}&appid=`
+          `https://api.openweathermap.org/data/3.0/onecall?units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=`
         )
-        .res((data) => data.data.current)
-        .catch((err) => {
-          console.error(err);
-        });
-
-      return data;
-    }
-  );
+        .then((res) => console.log(res.data.current))
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoading(false));
+    });
+  }, [setWeatherData, weatherData]);
 
   return (
     <div className="h-full bg-background">
-      <WeatherDisplay data=/>
+      {/* <WeatherDisplay data={weatherData} /> */}
     </div>
   );
 }

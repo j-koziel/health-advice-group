@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function Header() {
   return (

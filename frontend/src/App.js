@@ -6,11 +6,7 @@ function App() {
   const darkMode = useDarkMode(false);
 
   return (
-    <div
-      className={`${
-        darkMode.value ? "dark" : ""
-      } text-foreground bg-background`}
-    >
+    <div className={`${darkMode.value ? "dark" : ""} h-screen`}>
       <Header />
     </div>
   );

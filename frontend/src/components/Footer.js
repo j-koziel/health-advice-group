@@ -4,7 +4,7 @@ import { NavLink } from "./NavLink";
 export function Footer() {
   return (
     <div className="h-screen w-full flex flex-col items-center bg-background text-foreground">
-      <div className="h-[30%] w-full flex justify-center flex-wrap text-[100pt] md:text-[142pt] font-bold box-border select-none">
+      <div className="w-full flex justify-center flex-wrap text-[100pt] md:text-[140pt] font-bold box-border select-none">
         <span>H</span>
         <span>e</span>
         <span>a</span>
@@ -25,8 +25,8 @@ export function Footer() {
         <span>u</span>
         <span>p</span>
       </div>
-      <hr className="w-full bg-foreground"/>
-      <div className="h-[70%] w-full flex items-center justify-between text-3xl mx-10">
+      <hr className="w-full bg-foreground" />
+      <div className="h-[70%] w-full flex flex-col md:flex-row items-center justify-between gap-2 text-3xl px-10">
         {footerLinks.map((link, i) => (
           <NavLink
             key={i}

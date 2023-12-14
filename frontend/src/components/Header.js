@@ -8,7 +8,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full h-fit flex flex-col">
+    <div className="w-full h-fit flex flex-col" id="header">
       <div className="relative w-full h-fit flex flex-col md:flex-row gap-2 items-center justify-between p-4 bg-background text-foreground border-b-2 border-foreground">
         <h1 className="md:text-2xl text-lg font-bold">Health Advice Group</h1>
         <div

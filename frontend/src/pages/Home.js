@@ -12,14 +12,14 @@ export function Home() {
   useEffect(() => {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition((position) => {
-      const weatherData = axios
+      axios
         .get(
           `https://api.openweathermap.org/data/3.0/onecall?units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
         )
         .then((res) => setWeatherData({ ...res.data.current }))
         .catch((err) => console.error(err))
         .finally(() => setIsLoading(false));
-      const airQualityData = axios
+      axios
         .get(
           `http://api.openweathermap.org/data/2.5/air_pollution?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_AIR_QUALITY_KEY}`
         )

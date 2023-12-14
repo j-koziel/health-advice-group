@@ -9,7 +9,7 @@ export function Menu() {
           key={i}
           path={link.path}
           label={link.label}
-          className="w-full text-center rounded-sm p-2 text-lg bg-background text-foreground hover:bg-primary hover:text-background transition-colors"
+          className="w-full text-center rounded-sm p-2 text-lg bg-background text-foreground hover:bg-foreground hover:text-background transition-colors"
         />
       ))}
     </div>

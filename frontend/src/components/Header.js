@@ -1,8 +1,9 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, DivideSquare } from "lucide-react";
 import { useState } from "react";
 
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { Menu } from "./Menu";
+import { animate, motion } from "framer-motion";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,12 +17,16 @@ export function Header() {
             setIsMenuOpen(!isMenuOpen);
           }}
         >
-          <ChevronDown className="animate-bounce cursor-pointer !order-last md:absolute md:top-0 md:bottom-0 md:left-0 md:right-0 md:m-auto" />
+          <motion.div initial={{rotate: 0}} animate={{rotate: isMenuOpen ? 180 : 0, transition: {duration: 0.2}}}
+  style={{ zIndex: 10 }}>
+            <ChevronDown className="cursor-pointer order-last md:absolute md:left-0 md:right-0 md:m-auto" />
+          </motion.div>
         </div>
 
         <ThemeSwitcher />
       </div>
       {isMenuOpen && <Menu />}
+      {/* <Menu menuOpacity={isMenuOpen ? "opacity-100" : "opacity-0"} /> */}
     </div>
   );
 }

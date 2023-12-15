@@ -34,7 +34,7 @@ export function Home() {
       <Tabs color="primary">
         <Tab key="weather" title="Weather" className="text-foreground">
           {/* <WeatherDisplay weatherData={weatherData} /> */}
-          hello
+          {JSON.stringify(weatherData)}
         </Tab>
         <Tab key="air-quality" title="Air Quality">
           {JSON.stringify(airQualityData)}

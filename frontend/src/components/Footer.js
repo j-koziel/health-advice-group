@@ -1,13 +1,14 @@
 import { footerLinks } from "../settings/links";
 import { NavLink } from "./NavLink";
 import { motion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 export function Footer() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      className="h-screen w-full flex flex-col items-center bg-altBackground text-altForeground"
+      whileInView={{ opacity: 1, transition: {duration: 1, ease: "easeIn"} }}
+      className="h-screen w-full flex flex-col items-center bg-fixed bg-center bg-no-repeat bg-cover bg-altBackground text-altForeground"
     >
       <div className="w-full flex justify-center flex-wrap text-[100pt] md:text-[140pt] font-bold box-border select-none">
         <span>H</span>
@@ -47,5 +48,6 @@ export function Footer() {
         ))}
       </div>
     </motion.div>
+
   );
 }

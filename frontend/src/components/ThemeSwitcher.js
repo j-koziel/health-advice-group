@@ -7,17 +7,13 @@ export function ThemeSwitcher() {
   return (
     <div>
       <button
-        className={`${
-          darkMode.value === true
-            ? "bg-lightBackground rounded-full p-2"
-            : "bg-darkBackground rounded-full p-2"
-        }`}
+        className="bg-altBackground rounded-full p-2"
         onClick={darkMode.toggle}
       >
         {darkMode.value === true ? (
-          <Sun className="stroke-lightForeground" />
+          <Sun className="stroke-altForeground" />
         ) : (
-          <MoonStar className="stroke-darkForeground" />
+          <MoonStar className="stroke-altForeground" />
         )}
       </button>
     </div>

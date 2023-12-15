@@ -16,7 +16,7 @@ export function Header() {
             setIsMenuOpen(!isMenuOpen);
           }}
         >
-          <ChevronDown className="animate-bounce !order-last md:absolute md:top-0 md:bottom-0 md:left-0 md:right-0 md:m-auto" />
+          <ChevronDown className="animate-bounce cursor-pointer !order-last md:absolute md:top-0 md:bottom-0 md:left-0 md:right-0 md:m-auto" />
         </div>
 
         <ThemeSwitcher />

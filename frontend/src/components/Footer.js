@@ -7,7 +7,7 @@ export function Footer() {
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      className="h-screen w-full flex flex-col items-center bg-[#242929] text-[#ECF5F5]"
+      className="h-screen w-full flex flex-col items-center bg-altBackground text-altForeground"
     >
       <div className="w-full flex justify-center flex-wrap text-[100pt] md:text-[140pt] font-bold box-border select-none">
         <span>H</span>
@@ -31,7 +31,7 @@ export function Footer() {
         <span>p</span>
       </div>
       <hr className="w-full bg-foreground" />
-      <div className="h-[70%] w-full flex flex-col md:flex-row items-center justify-between gap-2 text-3xl px-10">
+      <div className="h-[70%] w-full flex flex-col md:flex-row items-center justify-between text-3xl px-10">
         {footerLinks.map((link, i) => (
           <motion.div
             initial={{ opacity: 0 }}
@@ -41,7 +41,7 @@ export function Footer() {
               key={i}
               path={link.path}
               label={link.label}
-              className="p-3 rounded-md hover:bg-[#ECF5F5] hover:text-[#242929] transition-colors"
+              className="p-3 m-2 rounded-md hover:bg-altForeground hover:text-altBackground transition-colors"
             />
           </motion.div>
         ))}

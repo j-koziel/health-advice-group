@@ -17,8 +17,9 @@ module.exports = {
           colors: {
             background: "#96BBBB",
             foreground: "#242929",
-            darkBackground: "#242929",
-            darkForeground: "#ECF5F5",
+            textColor: "#ECF5F5",
+            altBackground: "#242929",
+            altForeground: "#ECF5F5",
             primary: "#89ADAE",
             accent: "#5F8185",
           },
@@ -27,8 +28,9 @@ module.exports = {
           colors: {
             background: "#242929",
             foreground: "#ECF5F5",
-            lightBackground: "#96BBBB",
-            lightForeground: "#ECF5F5",
+            textColor: "#ECF5F5",
+            altBackground: "#96BBBB",
+            altForeground: "#242929",
             primary: "#89ADAE",
             accent: "#5F8185",
           },

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { WeatherDisplay } from "../components/WeatherDisplay";
-import { AirQualityDash } from "../components/AirQualityDash";
+// Will be used later on
+// import { WeatherDisplay } from "../components/WeatherDisplay";
+// import { AirQualityDash } from "../components/AirQualityDash";
 import { useEffect, useState } from "react";
 import { Tabs, Tab } from "@nextui-org/react";
 
@@ -8,6 +9,11 @@ export function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // warnings annoy me
+  console.log(weatherData);
+  console.log(airQualityData);
+  console.log(isLoading);
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,10 +40,10 @@ export function Home() {
       <Tabs color="primary">
         <Tab key="weather" title="Weather" className="text-foreground">
           {/* <WeatherDisplay weatherData={weatherData} /> */}
-          {JSON.stringify(weatherData)}
+          {/* {JSON.stringify(weatherData)} */}
         </Tab>
         <Tab key="air-quality" title="Air Quality">
-          {JSON.stringify(airQualityData)}
+          {/* {JSON.stringify(airQualityData)} */}
         </Tab>
       </Tabs>
     </div>

@@ -7,11 +7,15 @@ export function Menu() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { ease: "easeOut", duration: 0.5 } }}
-      exit={{ opacity: 0 }}
+      initial={{ top: 0, opacity: 0 }}
+      animate={{
+        top: headerHeight,
+        opacity: 1,
+        transition: { ease: "easeIn", duration: 0.2 },
+      }}
+      exit={{ top: 0, opacity: 0 }}
       className={`absolute left-0 right-0 z-[999] flex flex-col items-center justify-center bg-background p-1`}
-      style={{ top: `${headerHeight}px` }}
+      // style={{ top: `${headerHeight}px` }}
     >
       {menuLinks.map((link, i) => (
         <NavLink

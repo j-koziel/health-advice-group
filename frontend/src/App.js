@@ -12,18 +12,13 @@ function App() {
     <div className={`${darkMode.value ? "dark" : ""} h-screen`}>
       <Header />
 
-
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
 
       <Footer />
-
-
     </div>
   );
 }
-
-
 
 export default App;

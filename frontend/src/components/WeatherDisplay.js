@@ -1,4 +1,5 @@
 import { Wind, Sunrise, Sunset, MoveUp, Droplet, Sun } from "lucide-react";
+import { windDirection } from "../utils/windDirection";
 
 export function WeatherDisplay({ weatherData }) {
   console.log(weatherData);
@@ -28,7 +29,8 @@ export function WeatherDisplay({ weatherData }) {
                 <Sunset /> {new Date(weatherData.sunset).toLocaleTimeString()}
               </div>
               <div className="inline w-fit">
-                <MoveUp rotate={weatherData.wind_deg} /> East
+                <MoveUp rotate={weatherData.wind_deg} />
+                {windDirection(weatherData.wind_deg)}
               </div>
             </div>
             <div className="flex flex-col gap-2">

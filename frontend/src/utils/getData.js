@@ -1,34 +1,11 @@
 import axios from "axios";
 
-function getData(url) {
-  // This will decide whether we call
-  const resourceToAccess = url.includes("onecall") ? "weather" : "aq";
+export async function getOpenWeatherMapData(url) {
+  try {
+    const res = await axios.get(url);
 
-  const data =
-    resourceToAccess === "weather"
-      ? getWeatherData(url)
-      : getAirQualityData(url);
-
-  return data;
-}
-
-function getWeatherData(url) {
-  return null;
-}
-
-function getAirQualityData(url) {
-  return;
-}
-
-export function parseExcludeParams(onecallUrl) {
-  const params = new URL(onecallUrl).searchParams;
-
-  if (!params.has("exclude")) {
-    return;
+    return res.data;
+  } catch (err) {
+    console.error(err);
   }
-
-  const excludeItems = params.get("exclude").split(",");
-  console.log(excludeItems);
-
-  // return params.keys();
 }

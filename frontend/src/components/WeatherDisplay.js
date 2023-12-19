@@ -27,10 +27,18 @@ export function WeatherDisplay({ weatherData }) {
           <div className="flex gap-2">
             <div className="flex flex-col gap-2">
               <div className="inline w-fit">
-                <Sunrise /> {new Date(1702973042 + Date.now()).toDateString()}
+                <Sunrise />{" "}
+                {new Date(weatherData.sunrise * 1000).toLocaleTimeString(
+                  [],
+                  timeDisplayOptions
+                )}
               </div>
               <div className="inline w-fit">
-                <Sunset /> {new Date(1703001211).toDateString()}
+                <Sunset />{" "}
+                {new Date(weatherData.sunset * 1000).toLocaleTimeString(
+                  [],
+                  timeDisplayOptions
+                )}
               </div>
               <div className="inline w-fit">
                 <MoveUp
@@ -47,7 +55,7 @@ export function WeatherDisplay({ weatherData }) {
                 <Droplet /> {weatherData.humidity}% humidity
               </div>
               <div className="inline w-fit">
-                <Wind /> Wind speed: {weatherData.wind_speed} m/s
+                <Wind /> Wind speed: {Math.round(weatherData.wind_speed)} m/s
               </div>
             </div>
           </div>

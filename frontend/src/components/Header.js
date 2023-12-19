@@ -6,6 +6,7 @@ import { Menu } from "./Menu";
 import { motion } from "framer-motion";
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const headerHeight = document.querySelector("#header").clientHeight;
 
   return (
     <div className="w-full h-fit flex flex-col" id="header">

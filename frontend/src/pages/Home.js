@@ -20,7 +20,7 @@ export function Home() {
     navigator.geolocation.getCurrentPosition((position) => {
       axios
         .get(
-          `https://api.openweathermap.org/data/3.0/onecall?units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
+          `https://api.openweathermap.org/data/3.0/onecall?units=metric&lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}&exclude=minutely,hourly,daily,alerts`
         )
         .then((res) => setWeatherData({ ...res.data.current }))
         .catch((err) => console.error(err))

@@ -1,21 +1,26 @@
 import { NavLink } from "./NavLink";
 import { menuLinks } from "../settings/links";
 import { motion } from "framer-motion";
+import { useRef } from "react";
 
 export function Menu() {
   const headerHeight = document.querySelector("#header").clientHeight;
+  const MenuRef = useRef(null);
 
   return (
     <motion.div
-      initial={{ top: 0, opacity: 0 }}
+      ref={MenuRef}
+      initial={{ top: 0, opacity: 0, pointerEvents: "none" }}
       animate={{
         top: headerHeight,
         opacity: 1,
         transition: { ease: "easeIn", duration: 0.2 },
       }}
+      onAnimationComplete={() => {
+        MenuRef.current.style.pointerEvents = "all";
+      }}
       exit={{ top: 0, opacity: 0 }}
       className={`absolute left-0 right-0 z-[999] flex flex-col items-center justify-center bg-background p-1`}
-      // style={{ top: `${headerHeight}px` }}
     >
       {menuLinks.map((link, i) => (
         <NavLink

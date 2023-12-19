@@ -19,3 +19,16 @@ function getWeatherData(url) {
 function getAirQualityData(url) {
   return;
 }
+
+export function parseExcludeParams(onecallUrl) {
+  const params = new URL(onecallUrl).searchParams;
+
+  if (!params.has("exclude")) {
+    return;
+  }
+
+  const excludeItems = params.get("exclude").split(",");
+  console.log(excludeItems);
+
+  // return params.keys();
+}

@@ -3,12 +3,17 @@ import axios from "axios";
 // import { WeatherDisplay } from "../components/WeatherDisplay";
 // import { AirQualityDash } from "../components/AirQualityDash";
 import { useEffect, useState } from "react";
+import { parseExcludeParams } from "../utils/getData";
 import { Tabs, Tab } from "@nextui-org/react";
 
 export function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  parseExcludeParams(
+    `https://api.openweathermap.org/data/3.0/onecall?units=metric&exclude=minutely,hourly,daily,alerts`
+  );
 
   // warnings annoy me
   console.log(weatherData);

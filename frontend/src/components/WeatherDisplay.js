@@ -1,15 +1,15 @@
 import { Wind, Sunrise, Sunset, MoveUp, Droplet, Sun } from "lucide-react";
 import { windDirection } from "../utils/windDirection";
 
-export function WeatherDisplay({ weatherData }) {
+export function WeatherDisplay({ weatherData, location }) {
   const timeDisplayOptions = {
     hour: "2-digit",
     minute: "2-digit",
   };
 
   return (
-    <div className="flex justify-between text-foreground">
-      <div className="flex items-center">
+    <div className="flex flex-col items-center md:flex-row justify-center text-foreground">
+      <div className="flex flex-col md:flex-row items-center">
         <img
           src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
           alt="weather"
@@ -17,45 +17,58 @@ export function WeatherDisplay({ weatherData }) {
           height={200}
           className="object-cover"
         />
-        <div className="flex flex-col">
-          <h2 className="text-5xl font-bold">London, UK</h2>
-          <h2 className="text-5xl font-bold">Few Clouds</h2>
-          <h3>
-            {Math.round(weatherData.temp)}°C (Feels like{" "}
-            {Math.round(weatherData.feels_like)}°C)
-          </h3>
-          <div className="flex gap-2">
+        <div className="flex flex-col gap-4">
+          <div>
+            <h2 className="text-5xl">
+              {location.name}, {location.country}
+            </h2>
+            <h2 className="text-5xl capitalize">
+              {weatherData.weather[0].description}
+            </h2>
+            <div className="flex items-end gap-4">
+              <h3 className="text-5xl">{Math.round(weatherData.temp)}°C</h3>
+              <h3 className="text-3xl">
+                (Feels like {Math.round(weatherData.feels_like)}°C)
+              </h3>
+            </div>
+          </div>
+
+          <div className="flex gap-8">
             <div className="flex flex-col gap-2">
-              <div className="inline w-fit">
-                <Sunrise />{" "}
+              <div className="flex items-center gap-2 text-xl">
+                <Sunrise height={36} width={36} />
                 {new Date(weatherData.sunrise * 1000).toLocaleTimeString(
                   [],
                   timeDisplayOptions
                 )}
               </div>
-              <div className="inline w-fit">
-                <Sunset />{" "}
+              <div className="flex items-center gap-2 text-xl">
+                <Sunset height={36} width={36} />
                 {new Date(weatherData.sunset * 1000).toLocaleTimeString(
                   [],
                   timeDisplayOptions
                 )}
               </div>
-              <div className="inline w-fit">
+              <div className="flex items-center gap-2 text-xl">
                 <MoveUp
                   style={{ transform: `rotate(${weatherData.wind_deg}deg)` }}
+                  height={36}
+                  width={36}
                 />
                 {windDirection(weatherData.wind_deg)}
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="inline w-fit">
-                <Sun /> UV Index. {weatherData.uvi}
+              <div className="flex items-center gap-2 text-xl">
+                <Sun height={36} width={36} /> UV Index. {weatherData.uvi}
               </div>
-              <div className="inline w-fit">
-                <Droplet /> {weatherData.humidity}% humidity
+              <div className="flex items-center gap-2 text-xl">
+                <Droplet height={36} width={36} /> {weatherData.humidity}%
+                humidity
               </div>
-              <div className="inline w-fit">
-                <Wind /> Wind speed: {Math.round(weatherData.wind_speed)} m/s
+              <div className="flex items-center gap-2 text-xl">
+                <Wind height={36} width={36} /> Wind speed:{" "}
+                {Math.round(weatherData.wind_speed)} m/s
               </div>
             </div>
           </div>

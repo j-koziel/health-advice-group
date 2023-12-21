@@ -4,11 +4,14 @@ import { AirQualityDash } from "../components/AirQualityDash";
 import { useEffect, useState } from "react";
 import { config } from "../settings/config";
 import { getOpenWeatherMapData } from "../utils/getData";
-import { Tabs, Tab } from "@nextui-org/react";
+import { Tabs, Tab, CircularProgress } from "@nextui-org/react";
+import { motion } from "framer-motion";
+import axios from "axios";
 
 export function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -22,26 +25,45 @@ export function Home() {
       const currAirQualityData = await getOpenWeatherMapData(
         `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
       );
-      console.log(currWeatherData);
+      const currentLocationRes = await axios.get(
+        `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
+      );
 
       setWeatherData(currWeatherData.current);
       setAirQualityData(currAirQualityData.list[0]);
+      setCurrentLocation(currentLocationRes.data[0]);
       setIsLoading(false);
     });
   }, []);
 
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
+  if (isLoading)
+    return (
+      <div className="h-full">
+        <CircularProgress aria-label="Loading..." />;
+      </div>
+    );
 
   return (
     <div className="flex flex-col h-full bg-background items-center text-foreground">
       <Tabs color="primary">
         <Tab key="weather" title="Weather" className="text-foreground">
-          <WeatherDisplay weatherData={weatherData} />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+          >
+            <WeatherDisplay
+              weatherData={weatherData}
+              location={currentLocation}
+            />
+          </motion.div>
         </Tab>
         <Tab key="air-quality" title="Air Quality">
-          <AirQualityDash airQualityData={airQualityData} />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+          >
+            <AirQualityDash airQualityData={airQualityData} />
+          </motion.div>
         </Tab>
       </Tabs>
     </div>

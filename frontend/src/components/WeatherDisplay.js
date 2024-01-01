@@ -1,12 +1,7 @@
 import { Wind, Sunrise, Sunset, MoveUp, Droplet, Sun } from "lucide-react";
-import { windDirection } from "../utils/windDirection";
-
+import { windDirection } from "../utils/wind-direction";
+import { formatTime } from "../utils/format-time";
 export function WeatherDisplay({ weatherData, location }) {
-  const timeDisplayOptions = {
-    hour: "2-digit",
-    minute: "2-digit",
-  };
-
   return (
     <div className="flex flex-col items-center md:flex-row justify-center text-foreground">
       <div className="flex flex-col md:flex-row items-center">
@@ -37,17 +32,11 @@ export function WeatherDisplay({ weatherData, location }) {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-xl">
                 <Sunrise height={36} width={36} />
-                {new Date(weatherData.sunrise * 1000).toLocaleTimeString(
-                  [],
-                  timeDisplayOptions
-                )}
+                {formatTime(weatherData.sunrise)}
               </div>
               <div className="flex items-center gap-2 text-xl">
                 <Sunset height={36} width={36} />
-                {new Date(weatherData.sunset * 1000).toLocaleTimeString(
-                  [],
-                  timeDisplayOptions
-                )}
+                {formatTime(weatherData.sunset)}
               </div>
               <div className="flex items-center gap-2 text-xl">
                 <MoveUp

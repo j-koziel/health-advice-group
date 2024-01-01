@@ -3,7 +3,7 @@ import { WeatherDisplay } from "../components/WeatherDisplay";
 import { AirQualityDash } from "../components/AirQualityDash";
 import { useEffect, useState } from "react";
 import { config } from "../settings/config";
-import { getOpenWeatherMapData } from "../utils/getData";
+import { getOpenWeatherMapData } from "../utils/get-data";
 import { Tabs, Tab, CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import axios from "axios";

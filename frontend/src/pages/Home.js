@@ -19,9 +19,9 @@ export function Home() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
 
-      const currWeatherData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=minutely,hourly,daily,alerts&appid=${config.oneCallApiKey}`
-      );
+      // const currWeatherData = await getOpenWeatherMapData(
+      //   `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=minutely,hourly,daily,alerts&appid=${config.oneCallApiKey}`
+      // );
       const currAirQualityData = await getOpenWeatherMapData(
         `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
       );
@@ -29,7 +29,7 @@ export function Home() {
         `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
       );
 
-      setWeatherData(currWeatherData.current);
+      // setWeatherData(currWeatherData.current);
       setAirQualityData(currAirQualityData.list[0]);
       setCurrentLocation(currentLocationRes.data[0]);
       setIsLoading(false);
@@ -51,10 +51,10 @@ export function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { ease: "easeIn" } }}
           >
-            <WeatherDisplay
+            {/* <WeatherDisplay
               weatherData={weatherData}
               location={currentLocation}
-            />
+            /> */}
           </motion.div>
         </Tab>
         <Tab key="air-quality" title="Air Quality">

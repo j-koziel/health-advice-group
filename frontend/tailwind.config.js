@@ -22,6 +22,8 @@ module.exports = {
             altForeground: "#ECF5F5",
             primary: "#89ADAE",
             accent: "#5F8185",
+            warning: "#E55D23",
+            danger: "#D22B2B",
           },
         },
         dark: {
@@ -33,6 +35,8 @@ module.exports = {
             altForeground: "#242929",
             primary: "#89ADAE",
             accent: "#5F8185",
+            warning: "#E55D23",
+            danger: "#D22B2B",
           },
         },
       },

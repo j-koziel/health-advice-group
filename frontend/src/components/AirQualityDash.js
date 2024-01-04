@@ -2,11 +2,29 @@ import { CircularProgress } from "@nextui-org/react";
 
 export function AirQualityDash({ airQualityData }) {
   const airComponentRingsStyles = {
-    svg: "w-36 h-36",
+    svg: "w-36 h-36 rotate-[180deg]",
+    value: "text-3xl",
   };
 
   const airQualityIndexStyles = {
-    svg: "w-64 h-64",
+    svg: "w-64 h-64 rotate-[180deg]",
+    value: "text-6xl",
+  };
+
+  const airQualityDescription = (aqi) => {
+    if (!aqi) {
+      return "error";
+    }
+
+    console.log(aqi);
+    const descriptions = ["good", "fair", "moderate", "poor", "very poor"];
+    return descriptions[aqi - 1];
+  };
+
+  const airQualityRingColour = (val, minVal, midVal, maxVal) => {
+    if (val >= minVal && val < midVal) return "primary";
+    if (val >= midVal && val < maxVal) return "warning";
+    if (val >= maxVal) return "danger";
   };
 
   return (
@@ -15,84 +33,161 @@ export function AirQualityDash({ airQualityData }) {
         <div className="flex flex-col gap-y-4">
           <div className="flex">
             <CircularProgress
-              value={10}
+              value={airQualityData.components.pm2_5}
+              maxValue={75}
               classNames={airComponentRingsStyles}
-              label="PM2.5"
+              label="PM₂.₅"
               showValueLabel
-              formatOptions={{ style: "unit", unit: "kilometer" }}
+              color={airQualityRingColour(
+                airQualityData.components.pm2_5,
+                0,
+                50,
+                75
+              )}
+              formatOptions={{}}
             />
             <CircularProgress
-              value={10}
+              value={airQualityData.components.pm10}
+              maxValue={200}
               classNames={airComponentRingsStyles}
-              label="PM10"
+              label="PM₁₀"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.pm10,
+                0,
+                50,
+                200
+              )}
+              formatOptions={{}}
             />
           </div>
           <div className="flex">
             <CircularProgress
-              value={10}
+              value={airQualityData.components.so2}
+              maxValue={350}
               classNames={airComponentRingsStyles}
-              label="SO2"
+              label="SO₂"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.so2,
+                0,
+                250,
+                350
+              )}
+              formatOptions={{}}
             />
             <CircularProgress
-              value={10}
+              value={airQualityData.components.nh3}
+              minValue={0.1}
+              maxValue={200}
               classNames={airComponentRingsStyles}
-              label="NH3"
+              label="NH₃"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.nh3,
+                0.1,
+                100,
+                200
+              )}
+              formatOptions={{}}
             />
           </div>
         </div>
         <div>
           <CircularProgress
-            value={10}
+            value={airQualityData.main.aqi}
+            minValue={0}
+            maxValue={5}
             classNames={airQualityIndexStyles}
             label="AQI"
             showValueLabel
+            color={airQualityRingColour(airQualityData.main.aqi, 1, 3, 5)}
+            formatOptions={{}}
           />
         </div>
         <div className="flex flex-col gap-y-4">
           <div className="flex">
             <CircularProgress
-              value={10}
+              value={airQualityData.components.co}
+              minValue={0}
+              maxValue={15400}
               classNames={airComponentRingsStyles}
               label="CO"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.co,
+                0,
+                12400,
+                15400
+              )}
+              formatOptions={{}}
             />
             <CircularProgress
-              value={10}
+              value={airQualityData.components.no}
+              minValue={0.1}
+              maxValue={100}
               classNames={airComponentRingsStyles}
               label="NO"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.no,
+                0.1,
+                50,
+                100
+              )}
+              formatOptions={{}}
             />
           </div>
           <div className="flex">
             <CircularProgress
-              value={10}
+              value={airQualityData.components.no2}
+              minValue={0}
+              maxValue={200}
               classNames={airComponentRingsStyles}
-              label="NO2"
+              label="NO₂"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.no2,
+                0,
+                150,
+                200
+              )}
+              formatOptions={{}}
             />
             <CircularProgress
-              value={10}
+              value={airQualityData.components.o3}
+              minValue={0}
+              maxValue={180}
               classNames={airComponentRingsStyles}
-              label="O3"
+              label="O₃"
               showValueLabel
+              color={airQualityRingColour(
+                airQualityData.components.o3,
+                0,
+                140,
+                180
+              )}
+              formatOptions={{}}
             />
           </div>
         </div>
       </div>
-      <div className="w-full text-left">
+      <div className="mt-4 text-left">
         <p className="underline opacity-60 cursor-pointer">
           What do these numbers mean?
         </p>
       </div>
-      <div>
-        <p>
+      <div className="mt-4">
+        <p className="text-2xl">
           The air quality in your area is{" "}
-          <span className="underline">great</span>
+          <span className="underline">
+            {airQualityDescription(airQualityData.main.aqi)}
+          </span>
         </p>
       </div>
+      <dialog className="backdrop:blur">
+        <p>Hello!!!!</p>
+      </dialog>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { getOpenWeatherMapData } from "../utils/get-data";
 import { Tabs, Tab, CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { Accordion } from "../components/Accordion";
 
 export function Home() {
   const [weatherData, setWeatherData] = useState(null);
@@ -33,19 +34,36 @@ export function Home() {
       setAirQualityData(currAirQualityData.list[0]);
       setCurrentLocation(currentLocationRes.data[0]);
       setIsLoading(false);
-      console.log(currWeatherData);
     });
   }, []);
 
+  const accordionData = [
+    {
+      title: "Where do you get your data from?",
+      content:
+        "Obviously we want to be as accurate as possible when it comes to the data that we display on this site. To do this we are using an industry standard data source which is also used by established brands such as Microsoft, Amazon and Google",
+    },
+    {
+      title: "Where do you get the health advice from?",
+      content:
+        "We have an in-house formula which automatically creates the advice based on the current weather conditions",
+    },
+    {
+      title: "Why do I need this?",
+      content:
+        "In my opinion this tool is essential if you want to ensure your health even in the most extreme of weather conditions.",
+    },
+  ];
+
   if (isLoading)
     return (
-      <div className="h-full">
+      <div className="h-full w-full">
         <CircularProgress aria-label="Loading..." />;
       </div>
     );
 
   return (
-    <div className="flex flex-col h-full bg-background items-center text-foreground">
+    <div className="flex flex-col h-full w-full bg-background items-center text-foreground">
       <Tabs color="primary">
         <Tab key="weather" title="Weather" className="text-foreground">
           <motion.div
@@ -67,6 +85,10 @@ export function Home() {
           </motion.div>
         </Tab>
       </Tabs>
+      <div>
+        <h1 className="text-5xl">FAQs</h1>
+        <Accordion accordionData={accordionData} />
+      </div>
     </div>
   );
 }

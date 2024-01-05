@@ -9,7 +9,7 @@ function App() {
   const darkMode = useDarkMode(false);
 
   return (
-    <div className={`${darkMode.value ? "dark" : ""} h-screen`}>
+    <div className={`${darkMode.value ? "dark" : ""}`}>
       <Header />
 
       <Routes>

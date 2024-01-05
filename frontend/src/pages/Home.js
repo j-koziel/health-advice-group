@@ -23,10 +23,10 @@ export function Home() {
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=metric`
       );
       const currAirQualityData = await getOpenWeatherMapData(
-        `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
       );
       const currentLocationRes = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
       );
 
       setWeatherData(currWeatherData);

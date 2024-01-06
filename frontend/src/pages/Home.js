@@ -46,7 +46,7 @@ export function Home() {
     {
       title: "Where do you get the health advice from?",
       content:
-        "We have an in-house formula which automatically creates the advice based on the current weather conditions",
+        "We have an in-house formula which automatically selects the best advice based on the current weather conditions",
     },
     {
       title: "Why do I need this?",
@@ -63,12 +63,13 @@ export function Home() {
     );
 
   return (
-    <div className="flex flex-col h-full w-full bg-background items-center text-foreground">
-      <Tabs color="primary">
-        <Tab key="weather" title="Weather" className="text-foreground">
+    <div className="flex flex-col h-full w-full bg-background items-center text-foreground pb-96">
+      <Tabs color="primary" className="mt-8">
+        <Tab key="weather" title="Weather">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+            className="h-[500px]"
           >
             <WeatherDisplay
               weatherData={weatherData}
@@ -80,13 +81,15 @@ export function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+            className="h-[500px]"
           >
             <AirQualityDash airQualityData={airQualityData} />
           </motion.div>
         </Tab>
       </Tabs>
-      <div>
-        <h1 className="text-5xl">FAQs</h1>
+
+      <div className="h-full w-full px-12 mt-52 md:mt-0">
+        <h1 className="text-9xl py-44 font-bold">FAQs</h1>
         <Accordion accordionData={accordionData} />
       </div>
     </div>

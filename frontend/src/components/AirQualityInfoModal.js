@@ -53,7 +53,7 @@ export function AirQualityInfoModal({ isOpen, onOpenChange }) {
                   href="https://openweathermap.org/api/air-pollution#concept"
                   target="_blank"
                   rel="noreferrer"
-                  className="underline"
+                  className="underline font-bold"
                 >
                   here
                 </a>

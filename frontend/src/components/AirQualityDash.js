@@ -8,12 +8,14 @@ export function AirQualityDash({ airQualityData }) {
     svg: "w-36 h-36 rotate-[180deg]",
     value: "text-3xl",
     label: "text-xl",
+    track: "stroke-accent dark:opacity-60",
   };
 
   const airQualityIndexStyles = {
     svg: "w-64 h-64 rotate-[180deg]",
     value: "text-6xl",
     label: "text-2xl",
+    track: "stroke-accent dark:opacity-60",
   };
 
   const airQualityDescription = (aqi) => {

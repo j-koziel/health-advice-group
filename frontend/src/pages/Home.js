@@ -64,7 +64,16 @@ export function Home() {
 
   return (
     <div className="flex flex-col h-full w-full bg-background items-center text-foreground pb-96">
-      <Tabs color="primary" className="mt-8">
+      <Tabs
+        color="primary"
+        className="mt-8"
+        classNames={{
+          tabList: "bg-altBackground",
+          cursor: "w-full bg-altForeground",
+          tabContent:
+            "text-altForeground group-data-[selected=true]:text-foreground",
+        }}
+      >
         <Tab key="weather" title="Weather">
           <motion.div
             initial={{ opacity: 0 }}

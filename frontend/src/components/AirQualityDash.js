@@ -9,6 +9,7 @@ export function AirQualityDash({ airQualityData }) {
     value: "text-3xl",
     label: "text-xl",
     track: "stroke-accent dark:opacity-60",
+    indicator: "stroke-textColor",
   };
 
   const airQualityIndexStyles = {
@@ -16,6 +17,7 @@ export function AirQualityDash({ airQualityData }) {
     value: "text-6xl",
     label: "text-2xl",
     track: "stroke-accent dark:opacity-60",
+    indicator: "stroke-textColor",
   };
 
   const airQualityDescription = (aqi) => {

@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import useDarkMode from "use-dark-mode";
 import { Routes, Route } from "react-router-dom";
+import { SignIn } from "./pages/SignIn";
 
 function App() {
   const darkMode = useDarkMode(false);
@@ -14,6 +15,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
 
       <Footer />

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Input } from "../components/Input";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -19,6 +21,7 @@ export function SignInForm() {
           console.log("form submitted");
           console.log(email);
           console.log(password);
+          navigate("/dashboard");
         }}
         className="h-1/2 w-full flex flex-col justify-evenly items-center"
       >

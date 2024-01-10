@@ -1,5 +1,4 @@
 from json import load, dump
-from models import user_models
 
 def read_db(model, db_path: str):
   with open(db_path) as json_file:

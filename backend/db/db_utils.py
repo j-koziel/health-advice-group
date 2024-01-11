@@ -27,10 +27,16 @@ def save_db(db: list, db_path: str) -> None:
   with open(db_path, "w") as json_file:
     dump([entity.model_dump() for entity in db], json_file, indent=4)
 
-def get_user(db: list[UserInDb], id: str) -> UserInDb | None:
-  for user in db:
-    if user.id == id:
-      user_dict = user
-      return UserInDb(**user_dict)
+def get_user(db: list[UserInDb], id: str = "", email: str = "") -> UserInDb | None:
+  if id:
+    for user in db:
+      if user.id == id:
+        user_dict = dict(user)
+        return UserInDb(**user_dict)
+  else:
+    for user in db:
+      if user.email == email:
+        user_dict = dict(user)
+        return UserInDb(**user_dict)
     
-  raise None
+  return None

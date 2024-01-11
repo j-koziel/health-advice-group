@@ -12,11 +12,11 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def verify_password(plain_password: str, hashed_password: str):
   return pwd_context.verify(plain_password, hashed_password)
 
-def hash_password(password: str):
+def hash_password(password: str) -> str:
   return pwd_context.hash(password)
 
 def authenticate_user(db: list, email: str, password: str) -> UserInDb:
-  user = get_user(db, email)
+  user = get_user(db, email=email)
   if not user:
     return False
   if not verify_password(password, user.hashed_password):
@@ -24,7 +24,7 @@ def authenticate_user(db: list, email: str, password: str) -> UserInDb:
   
   return user
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
   to_encode = data.copy()
   if expires_delta:
     expire = datetime.now(timezone.utc) + expires_delta

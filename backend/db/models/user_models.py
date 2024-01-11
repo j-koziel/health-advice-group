@@ -1,4 +1,4 @@
-from uuid import UUID, uuid4
+from uuid import uuid4
 from pydantic import BaseModel
 
 class Location(BaseModel):
@@ -6,8 +6,8 @@ class Location(BaseModel):
   lon: float
 
 class User(BaseModel):
-  id: UUID = uuid4(),
+  id: str = uuid4(),
   name: str
   email: str
   password: str
-  preferredLocations: list[Location] | list = []
+  preferredLocations: list = []

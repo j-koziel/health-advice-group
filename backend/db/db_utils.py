@@ -11,7 +11,7 @@ def read_db(model, db_path: str) -> list:
     list: a list of python dictionaries which have been validated by the model
   """
   with open(db_path) as json_file:
-    return [model.model_validate_json(entity) for entity in load(json_file)]
+    return [model.model_validate(entity) for entity in load(json_file)]
   
 
 def save_db(db: list, db_path: str) -> None:

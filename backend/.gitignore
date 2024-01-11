@@ -1,4 +1,3 @@
 venv
-/db/*/*.json
 __pycache__
 .env

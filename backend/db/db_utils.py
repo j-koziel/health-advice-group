@@ -1,4 +1,5 @@
 from json import load, dump
+from db.models.user_models import UserInDb
 
 def read_db(model, db_path: str) -> list:
   """This function loads the database and returns it as a python list
@@ -26,3 +27,10 @@ def save_db(db: list, db_path: str) -> None:
   with open(db_path, "w") as json_file:
     dump([entity.model_dump() for entity in db], json_file, indent=4)
 
+def get_user(db: list[UserInDb], id: str) -> UserInDb | None:
+  for user in db:
+    if user.id == id:
+      user_dict = user
+      return UserInDb(**user_dict)
+    
+  raise None

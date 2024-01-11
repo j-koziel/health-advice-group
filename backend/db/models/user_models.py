@@ -9,5 +9,7 @@ class User(BaseModel):
   id: str = uuid4(),
   name: str
   email: str
-  password: str
-  preferredLocations: list = []
+  preferred_locations: list[Location] = []
+
+class UserInDb(User):
+  hashed_password: str

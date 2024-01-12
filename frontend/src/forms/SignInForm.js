@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "../components/Input";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
@@ -16,11 +17,18 @@ export function SignInForm() {
     >
       <h1 className="text-5xl m-0 ">Sign In</h1>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          console.log("form submitted");
-          console.log(email);
-          console.log(password);
+          const res = await axios.post(
+            "http://localhost:8000/api/v1/users/token",
+            {
+              username: email,
+              password: password,
+            }
+          );
+
+          localStorage.setItem("jwtToken", res.data.access_token);
+
           navigate("/dashboard");
         }}
         className="h-1/2 w-full flex flex-col justify-evenly items-center"

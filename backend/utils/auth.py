@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from typing import Union
 
 from passlib.context import CryptContext
 from jose import JWTError, jwt
@@ -24,7 +25,7 @@ def authenticate_user(db: list, email: str, password: str) -> UserInDb:
   
   return user
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
+def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None) -> str:
   to_encode = data.copy()
   if expires_delta:
     expire = datetime.now(timezone.utc) + expires_delta

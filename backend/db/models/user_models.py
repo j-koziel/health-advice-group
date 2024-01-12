@@ -1,3 +1,5 @@
+from typing import Union
+
 from uuid import uuid4
 from pydantic import BaseModel
 
@@ -10,13 +12,13 @@ class NewUser(BaseModel):
   name: str
   email: str
   password: str
-  preferred_locations: list[Location] | list[None] = []
+  preferred_locations: Union[list[Location], list[None]] = []
 
 class User(BaseModel):
   id: str = uuid4(),
   name: str
   email: str
-  preferred_locations: list[Location] | list[None] = []
+  preferred_locations: Union[list[Location], list[None]] = []
 
 class UserInDb(User):
   hashed_password: str

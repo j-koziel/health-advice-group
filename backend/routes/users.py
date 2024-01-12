@@ -75,6 +75,8 @@ async def create_new_user(cand_user: NewUser):
 
 @router.post("/token", response_model=Token, tags=["users"])
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+  print(form_data)
+  print(form_data.username, form_data.password)
   user = authenticate_user(users_db, form_data.username, form_data.password)
   if not user:
     print(user)

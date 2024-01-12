@@ -26,7 +26,10 @@ export function SignInForm() {
             {
               username: email,
               password: password,
-            }
+            },
+            {headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            }}
           );
 
           localStorage.setItem("jwtToken", res.data.access_token);

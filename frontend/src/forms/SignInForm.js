@@ -19,6 +19,8 @@ export function SignInForm() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          console.log(email);
+          console.log(password);
           const res = await axios.post(
             "http://localhost:8000/api/v1/users/token",
             {
@@ -28,6 +30,7 @@ export function SignInForm() {
           );
 
           localStorage.setItem("jwtToken", res.data.access_token);
+          console.log(localStorage.getItem("jwtToken"));
 
           navigate("/dashboard");
         }}
@@ -50,7 +53,7 @@ export function SignInForm() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={8}
+          // minLength={8}
           maxLength={100}
           required
         />

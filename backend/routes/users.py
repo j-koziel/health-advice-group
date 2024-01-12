@@ -4,9 +4,6 @@ from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from jose import jwt, JWTError
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
 
 from db.db_utils import get_user, save_db
 from db.models.user_models import UserInDb, NewUser, User
@@ -16,13 +13,9 @@ from utils.auth import authenticate_user, create_access_token, hash_password
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/users/token")
 
-limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/api/v1/users")
-router.state.limiter = limiter
-router.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 @router.get("/", tags=["users"])
-@limiter.limit("60/minute")
 async def read_users() -> list[UserInDb]:
   """This route will return all the users which exist in the database
   """
@@ -49,7 +42,6 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
   return user
 
 @router.post("/", response_model=TokenData, tags=["users"])
-@limiter.limit("100/minute")
 async def create_new_user(cand_user: NewUser):
   """This route creates a new user and saves it to the database
 
@@ -82,7 +74,6 @@ async def create_new_user(cand_user: NewUser):
   return {"access_token": access_token, "token_type": "bearer"}
 
 @router.post("/token", response_model=Token, tags=["users"])
-@limiter.limit("100/minute")
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
   user = authenticate_user(users_db, form_data.username, form_data.password)
   if not user:
@@ -96,6 +87,5 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 
 
 @router.get("/me", response_model=User, tags=["users"])
-@limiter.limit("100/minute")
 async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
   return current_user

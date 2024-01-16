@@ -1,32 +1,16 @@
 [
-    {
-        "id": "bf423422-f7d0-4c56-b145-48be15e59550",
-        "name": "Test User",
-        "email": "exampleEmail@gmail.com",
-        "preferred_locations": [
-            {
-                "lat": 41.55,
-                "lon": 70.11
-            },
-            {
-                "lat": 55.02,
-                "lon": 90.23
-            }
-        ],
-        "hashed_password": "anotherpass"
-    },
-    {
-        "id": "707cfde7-3644-4f72-a1ec-94c0b1773ff2",
-        "name": "Test User",
-        "email": "test@gmail.com",
-        "preferred_locations": [],
-        "hashed_password": "$2b$12$N1b1DpqPHfTIDgcmE57WcOdGD3xn7cTMomWtftfXtNzI1iLuQxiX."
-    },
-    {
-        "id": "ea6a6165-5cd3-47b7-bd97-0bf575123d01",
-        "name": "string",
-        "email": "string@gmail.com",
-        "preferred_locations": [],
-        "hashed_password": "$2b$12$MPs8ZUBTOSe.xXtu667Id.tNLYG/MPzc7Bke4dIUS8qRU/5nd0uPi"
-    }
+  {
+    "id": "707cfde7-3644-4f72-a1ec-94c0b1773ff2",
+    "name": "Test User",
+    "email": "test@gmail.com",
+    "preferred_locations": [],
+    "hashed_password": "$2b$12$N1b1DpqPHfTIDgcmE57WcOdGD3xn7cTMomWtftfXtNzI1iLuQxiX."
+  },
+  {
+    "id": "ea6a6165-5cd3-47b7-bd97-0bf575123d01",
+    "name": "string",
+    "email": "string@gmail.com",
+    "preferred_locations": [],
+    "hashed_password": "$2b$12$MPs8ZUBTOSe.xXtu667Id.tNLYG/MPzc7Bke4dIUS8qRU/5nd0uPi"
+  }
 ]

@@ -1,6 +1,27 @@
+import { useState } from "react";
+import { Checkbox } from "@nextui-org/react";
+
 import { Input } from "./Input";
 
 export function UserSettings({ userData }) {
+  const [metricIsSelected, setMetricIsSelected] = useState(
+    localStorage.getItem("preferredUnits") === "metric" || null ? true : false
+  );
+  const [imperialIsSelected, setImperialIsSelected] = useState(
+    localStorage.getItem("preferredUnits") === "imperial" ? true : false
+  );
+
+  const handleUnitChange = (
+    isSelected,
+    setUserSelection,
+    setOpposite,
+    units
+  ) => {
+    setUserSelection(isSelected);
+    setOpposite(!isSelected);
+    localStorage.setItem("preferredUnits", units);
+  };
+
   return (
     <div className="w-[200px] md:w-[600px]">
       <h1 className="font-bold text-2xl md:text-4xl">Settings</h1>
@@ -32,8 +53,36 @@ export function UserSettings({ userData }) {
 
         <div className="w-1/2 flex flex-col items-center">
           <h2 className="text-2xl font-bold">Preferred Units</h2>
-          <p>Metric</p>
-          <p>Imperial</p>
+          <div className="w-full flex justify-center gap-x-2">
+            <Checkbox
+              isSelected={!imperialIsSelected}
+              onValueChange={(isSelected) => {
+                handleUnitChange(
+                  isSelected,
+                  setMetricIsSelected,
+                  setImperialIsSelected,
+                  "metric"
+                );
+              }}
+              color="primary"
+            >
+              Metric
+            </Checkbox>
+            <Checkbox
+              isSelected={!metricIsSelected}
+              onValueChange={(isSelected) => {
+                handleUnitChange(
+                  isSelected,
+                  setImperialIsSelected,
+                  setMetricIsSelected,
+                  "imperial"
+                );
+              }}
+              color="primary"
+            >
+              Imperial
+            </Checkbox>
+          </div>
         </div>
       </div>
     </div>

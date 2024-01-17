@@ -19,9 +19,10 @@ export function Home() {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
+      const units = localStorage.getItem("preferredUnits") ?? "metric";
 
       const currWeatherData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${units}`
       );
       const currAirQualityData = await getOpenWeatherMapData(
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`

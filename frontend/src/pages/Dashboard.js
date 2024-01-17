@@ -57,7 +57,7 @@ export function Dashboard() {
     );
 
   return (
-    <div className="bg-background h-screen w-full flex flex-row ">
+    <div className="bg-background h-screen w-full flex flex-row text-foreground">
       {dashboardItems.map((dashItem, i) => {
         return (
           <motion.div

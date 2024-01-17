@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Input } from "../components/Input";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const { setAccessToken } = useAuth();
 
   return (
     <motion.div
@@ -27,13 +30,15 @@ export function SignInForm() {
               username: email,
               password: password,
             },
-            {headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            }}
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+            }
           );
 
-          localStorage.setItem("jwtToken", res.data.access_token);
-          console.log(localStorage.getItem("jwtToken"));
+          localStorage.setItem("accessToken", res.data.access_token);
+          console.log(localStorage.getItem("accessToken"));
 
           navigate("/dashboard");
         }}
@@ -44,6 +49,7 @@ export function SignInForm() {
           placeholder="example@gmail.com"
           id="email"
           labelText="Email"
+          className="flex flex-col w-3/4 gap-2"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -54,6 +60,7 @@ export function SignInForm() {
           placeholder="••••••••"
           labelText="Password"
           id="password"
+          className="flex flex-col w-3/4 gap-2"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           // minLength={8}

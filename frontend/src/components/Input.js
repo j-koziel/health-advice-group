@@ -1,6 +1,13 @@
-export function Input({ type, placeholder, labelText, id, ...props }) {
+export function Input({
+  type,
+  placeholder,
+  labelText,
+  id,
+  className,
+  ...props
+}) {
   return (
-    <div className="flex flex-col w-3/4 gap-2">
+    <div className={className}>
       <label labelFor={id} className="text-2xl">
         {labelText}
       </label>

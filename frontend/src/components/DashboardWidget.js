@@ -1,6 +1,6 @@
 export function DashboardWidget({ children }) {
   return (
-    <div className="w-1/2 h-1/2 border-solid border-foreground border-2 rounded-md m-4 flex items-center justify-center">
+    <div className="h-1/2 border-solid border-foreground border-2 rounded-md flex p-4 m-4 shadow-lg ">
       {children}
     </div>
   );

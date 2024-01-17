@@ -25,18 +25,21 @@ export function SignUpForm() {
           placeholder="example@gmail.com"
           id="email"
           labelText="Email"
+          className="flex flex-col w-3/4 gap-2"
         />
         <Input
           type="password"
           placeholder="••••••••"
           labelText="Password"
           id="password"
+          className="flex flex-col w-3/4 gap-2"
         />
         <Input
           type="password"
           placeholder="••••••••"
           labelText="Confirm password"
           id="confirm-password"
+          className="flex flex-col w-3/4 gap-2"
         />
         <input
           type="submit"

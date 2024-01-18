@@ -17,6 +17,7 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://health-advice-group.vercel.app"
 ]
 
 app.add_middleware(

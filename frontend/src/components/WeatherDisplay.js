@@ -1,7 +1,10 @@
 import { Wind, Sunrise, Sunset, MoveUp, Droplet, Sun } from "lucide-react";
+
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
-export function WeatherDisplay({ weatherData, displayStyle }) {
+import { formatTempUnits, formatDistanceUnits } from "../utils/units";
+
+export function WeatherDisplay({ weatherData, units, displayStyle }) {
   if (displayStyle === "compact")
     return (
       <div className="w-full flex flex-col items-center md:flex-row justify-center text-foreground">
@@ -23,10 +26,12 @@ export function WeatherDisplay({ weatherData, displayStyle }) {
               </h2>
               <div className="flex items-end gap-4">
                 <h3 className="text-5xl">
-                  {Math.round(weatherData.main.temp)}°C
+                  {Math.round(weatherData.main.temp)}
+                  {formatTempUnits(units)}
                 </h3>
                 <h3 className="text-3xl">
-                  (Feels like {Math.round(weatherData.main.feels_like)}°C)
+                  Feels like {Math.round(weatherData.main.feels_like)}{" "}
+                  {formatTempUnits(units)}
                 </h3>
               </div>
             </div>
@@ -60,7 +65,8 @@ export function WeatherDisplay({ weatherData, displayStyle }) {
                 </div>
                 <div className="flex items-center gap-2 text-xl">
                   <Wind height={36} width={36} /> Wind speed:{" "}
-                  {Math.round(weatherData.wind.speed)} m/s
+                  {Math.round(weatherData.wind.speed)}{" "}
+                  {formatDistanceUnits(units)}
                 </div>
               </div>
             </div>
@@ -90,10 +96,12 @@ export function WeatherDisplay({ weatherData, displayStyle }) {
                 </h2>
                 <div className="flex items-end gap-4">
                   <h3 className="text-5xl">
-                    {Math.round(weatherData.main.temp)}°C
+                    {Math.round(weatherData.main.temp)}
+                    {formatTempUnits(units)}
                   </h3>
                   <h3 className="text-3xl">
-                    (Feels like {Math.round(weatherData.main.feels_like)}°C)
+                    (Feels like {Math.round(weatherData.main.feels_like)}
+                    {formatTempUnits(units)})
                   </h3>
                 </div>
               </div>
@@ -129,7 +137,8 @@ export function WeatherDisplay({ weatherData, displayStyle }) {
                   </div>
                   <div className="flex items-center gap-2 text-xl">
                     <Wind height={36} width={36} /> Wind speed:{" "}
-                    {Math.round(weatherData.wind.speed)} m/s
+                    {Math.round(weatherData.wind.speed)}{" "}
+                    {formatDistanceUnits(units)}
                   </div>
                 </div>
               </div>

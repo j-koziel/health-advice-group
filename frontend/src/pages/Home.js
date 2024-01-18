@@ -1,28 +1,29 @@
-// Will be used later on
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Tabs, Tab, CircularProgress } from "@nextui-org/react";
+import axios from "axios";
+
 import { WeatherDisplay } from "../components/WeatherDisplay";
 import { AirQualityDash } from "../components/AirQualityDash";
-import { useEffect, useState } from "react";
 import { config } from "../settings/config";
 import { getOpenWeatherMapData } from "../utils/get-data";
-import { Tabs, Tab, CircularProgress } from "@nextui-org/react";
-import { motion } from "framer-motion";
-import axios from "axios";
 import { Accordion } from "../components/Accordion";
+import { useWeatherUnits } from "../context/UnitsContext";
 
 export function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
-      const units = localStorage.getItem("preferredUnits") ?? "metric";
 
       const currWeatherData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${units}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${preferredUnits}`
       );
       const currAirQualityData = await getOpenWeatherMapData(
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
@@ -36,7 +37,7 @@ export function Home() {
       setCurrentLocation(currentLocationRes.data[0]);
       setIsLoading(false);
     });
-  }, []);
+  }, [preferredUnits]);
 
   const accordionData = [
     {
@@ -83,6 +84,7 @@ export function Home() {
           >
             <WeatherDisplay
               weatherData={weatherData}
+              units={preferredUnits}
               location={currentLocation}
             />
           </motion.div>

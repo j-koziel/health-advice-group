@@ -3,20 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { NextUIProvider } from "@nextui-org/react";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { Providers } from "./providers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <NextUIProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </NextUIProvider>
-    </BrowserRouter>
+    <Providers>
+      <App />
+    </Providers>
   </React.StrictMode>
 );
 

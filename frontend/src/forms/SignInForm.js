@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Input } from "../components/Input";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+
+import { Input } from "../components/Input";
+import { useAuth } from "../context/AuthContext";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
   const { setAccessToken } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -22,8 +22,6 @@ export function SignInForm() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          console.log(email);
-          console.log(password);
           const res = await axios.post(
             "http://localhost:8000/api/v1/users/token",
             {
@@ -38,7 +36,7 @@ export function SignInForm() {
           );
 
           localStorage.setItem("accessToken", res.data.access_token);
-          console.log(localStorage.getItem("accessToken"));
+          setAccessToken(res.data.access_token);
 
           navigate("/dashboard");
         }}

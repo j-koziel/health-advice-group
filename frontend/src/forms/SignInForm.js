@@ -23,6 +23,7 @@ export function SignInForm() {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          console.log(process.env.NODE_ENV);
           const res = await axios.post(
             `${config.backendUrl}/api/v1/users/token`,
             {

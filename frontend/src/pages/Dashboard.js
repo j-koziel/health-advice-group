@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
 
@@ -17,7 +16,6 @@ export function Dashboard() {
   const [airQualityData, setAirQualityData] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const { accessToken, me } = useAuth();
   const { preferredUnits } = useWeatherUnits();
@@ -41,7 +39,7 @@ export function Dashboard() {
     me(accessToken, setUserData);
 
     setIsLoading(false);
-  }, [preferredUnits]);
+  }, [preferredUnits, me, accessToken]);
 
   const dashboardItems = [
     weatherData && (

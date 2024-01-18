@@ -75,11 +75,8 @@ async def create_new_user(cand_user: NewUser):
 
 @router.post("/token", response_model=Token, tags=["users"])
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
-  print(form_data)
-  print(form_data.username, form_data.password)
   user = authenticate_user(users_db, form_data.username, form_data.password)
   if not user:
-    print(user)
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect email or password", headers={"WWW-Authenticate": "Bearer"})
   
   access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -91,3 +88,8 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 @router.get("/me", response_model=User, tags=["users"])
 async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
   return current_user
+
+@router.post("/me", response_model=User, tags=["user"])
+async def update_me(current_user: Annotated[User, Depends(get_current_user)], updated_user_fields):
+  # updated_user
+  return {"msg": "the user has been updated successfully", "user": updated_user_fields}

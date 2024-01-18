@@ -26,7 +26,7 @@ def save_db(db: list, db_path: str) -> None:
   Returns:
     None
   """
-  with open(db_path, "w") as json_file:
+  with open(db_path, "w+") as json_file:
     dump([entity.model_dump() for entity in db], json_file, indent=4)
 
 def get_user(db: list[UserInDb], id: str = "", email: str = "") -> Union[UserInDb, None]:

@@ -6,7 +6,7 @@ from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 
 from db.db_utils import get_user, save_db
-from db.models.user_models import UserInDb, NewUser, User
+from db.models.user_models import UserInDb, NewUser, User, UpdatedUser
 from db.models.auth_models import TokenData, Token
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, USERS_DB_PATH, users_db
 from utils.auth import authenticate_user, create_access_token, hash_password
@@ -89,7 +89,17 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
   return current_user
 
-@router.post("/me", response_model=User, tags=["user"])
-async def update_me(current_user: Annotated[User, Depends(get_current_user)], updated_user_fields):
-  # updated_user
+@router.put("/me", tags=["user"])
+async def update_me(current_user: Annotated[User, Depends(get_current_user)], updated_user_fields: UpdatedUser):
+  curr_user_in_db = get_user(users_db, id=current_user.id)
+
+  if updated_user_fields.name:
+    curr_user_in_db.name = updated_user_fields.name
+
+  if updated_user_fields.email:
+    curr_user_in_db.email = updated_user_fields.email
+
+  users_db
+
+
   return {"msg": "the user has been updated successfully", "user": updated_user_fields}

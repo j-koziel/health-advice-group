@@ -1,5 +1,5 @@
 export const config = {
-  deployedBackendUrl:
+  backendUrl:
     process.env.VERCEL_ENV === "production" ||
     process.env.NODE_ENV === "production"
       ? process.env.REACT_APP_PROD_BACKEND_URL

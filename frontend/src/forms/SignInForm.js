@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { Input } from "../components/Input";
+import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
 
 export function SignInForm() {
@@ -23,7 +24,7 @@ export function SignInForm() {
         onSubmit={async (e) => {
           e.preventDefault();
           const res = await axios.post(
-            "http://localhost:8000/api/v1/users/token",
+            `${config.backendUrl}/api/v1/users/token`,
             {
               username: email,
               password: password,

@@ -11,6 +11,10 @@ import { getOpenWeatherMapData } from "../utils/get-data";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
 import { useWeatherUnits } from "../context/UnitsContext";
+import {toast, ToastContainer} from "react-toastify"
+
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
@@ -22,6 +26,7 @@ export function Dashboard() {
   const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
+    
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
@@ -40,7 +45,16 @@ export function Dashboard() {
     me(accessToken, setUserData);
 
     setIsLoading(false);
+
+    
   }, [preferredUnits, me, accessToken]);
+
+  useEffect(() => {
+    userData && toast.success(`Welcome back, ${userData.name}!!!`, {style: {
+      backgroundColor: "#242929",
+      color: "#ECF5F5"
+    }})
+  }, [userData])
 
   const dashboardItems = [
     weatherData && (
@@ -64,6 +78,8 @@ export function Dashboard() {
       </div>
     );
 
+
+
   return (
     <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:flex-wrap lg:h-screen">
       {dashboardItems.map((dashItem, i) => {
@@ -80,6 +96,7 @@ export function Dashboard() {
           </motion.div>
         );
       })}
+      <ToastContainer position="bottom-right" draggable={true} transition="zoom" limit={1}/>
     </div>
   );
 }

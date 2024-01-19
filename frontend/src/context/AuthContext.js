@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     setUserData({ ...res.data });
-    return;
+    return res.data;
   }
 
   return (

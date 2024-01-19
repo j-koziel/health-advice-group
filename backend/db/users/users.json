@@ -7,10 +7,24 @@
         "hashed_password": "$2b$12$N1b1DpqPHfTIDgcmE57WcOdGD3xn7cTMomWtftfXtNzI1iLuQxiX."
     },
     {
-        "id": "44cfbcf6-f24c-445f-8ff4-3834f0298eb0",
+        "id": "b951a6ea-b2b6-49ae-a215-ba1458510e96",
         "name": "John Doe",
         "email": "example@gmail.com",
         "preferred_locations": [],
-        "hashed_password": "$2b$12$jhMdDTBAjCnXlSuRrqmQS.u0uu0fSO4wQOYUvMbHpNm6FZ96zAmDm"
+        "hashed_password": "$2b$12$lB6ogoP2.aXgwDugMBlAoOA.j91nJilTxDI6OrMhdO3Ib/Rxp25pW"
+    },
+    {
+        "id": "1a8dded4-feb6-47cb-8f23-bbd757525d11",
+        "name": "John Doe",
+        "email": "example1@gmail.com",
+        "preferred_locations": [],
+        "hashed_password": "$2b$12$6lbVf6180kDWQuernOAd7OOsdTGFpfrAbhYAQETcy9fWaUUqihrFG"
+    },
+    {
+        "id": "000f505e-5f1c-4f80-81fb-e5696a551167",
+        "name": "John Doe",
+        "email": "example2@gmail.com",
+        "preferred_locations": [],
+        "hashed_password": "$2b$12$.BLNkzIt1CNqIztnTvAOieCV0pBqLAd.PaghDT3ej0yo6QhDmhX3S"
     }
 ]

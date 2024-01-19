@@ -39,7 +39,7 @@ export function UserSettings({ userData }) {
           className="md:w-1/2 flex flex-col gap-y-4"
           onSubmit={async (e) => {
             e.preventDefault();
-            const res = await axios.put(
+            await axios.put(
               `${config.backendUrl}/api/v1/users/me`,
               { name: newName, email: newEmail },
               {
@@ -48,7 +48,6 @@ export function UserSettings({ userData }) {
                 },
               }
             );
-            console.log(res.data);
           }}
         >
           <Input

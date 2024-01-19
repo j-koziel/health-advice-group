@@ -8,11 +8,9 @@ class Location(BaseModel):
   lon: float
 
 class NewUser(BaseModel):
-  id: str = uuid4(),
   name: str
   email: str
   password: str
-  preferred_locations: Union[list[Location], list[None]] = []
 
 class User(BaseModel):
   id: str = uuid4(),

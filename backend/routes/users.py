@@ -1,5 +1,6 @@
 from typing import Annotated, Union
 from datetime import timedelta
+from uuid import uuid4
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
@@ -41,7 +42,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     raise credentials_exception
   return user
 
-@router.post("/", response_model=TokenData, tags=["users"])
+@router.post("/", response_model=Token, tags=["users"])
 async def create_new_user(cand_user: NewUser):
   """This route creates a new user and saves it to the database
 
@@ -55,16 +56,14 @@ async def create_new_user(cand_user: NewUser):
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid user")
   
   for user in users_db:
-    if cand_user.id == user.id:
+    if cand_user.email == user.email:
       raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="That user already exists")
 
   new_user = dict(cand_user)
   new_user["hashed_password"] = hash_password(new_user["password"])
   del new_user["password"]
-  print("This is the candidate user")
-  print(cand_user)
 
-  new_user["id"] = str(new_user["id"])
+  new_user["id"] = str(uuid4())
 
   new_user = UserInDb(**new_user)
 

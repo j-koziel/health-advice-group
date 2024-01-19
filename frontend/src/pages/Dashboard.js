@@ -6,6 +6,7 @@ import { DashboardWidget } from "../components/DashboardWidget";
 import { AirQualityDash } from "../components/AirQualityDash";
 import { WeatherDisplay } from "../components/WeatherDisplay";
 import { UserSettings } from "../components/UserSettings";
+import { HealthAdvice } from "../components/HealthAdvice";
 import { getOpenWeatherMapData } from "../utils/get-data";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
@@ -49,6 +50,7 @@ export function Dashboard() {
         displayStyle="compact"
       />
     ),
+    <HealthAdvice />,
     airQualityData && (
       <AirQualityDash airQualityData={airQualityData} dashboardType="compact" />
     ),
@@ -63,7 +65,7 @@ export function Dashboard() {
     );
 
   return (
-    <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:h-screen">
+    <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:flex-wrap lg:h-screen">
       {dashboardItems.map((dashItem, i) => {
         return (
           <motion.div

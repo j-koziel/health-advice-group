@@ -61,6 +61,10 @@ async def create_new_user(cand_user: NewUser):
   new_user = dict(cand_user)
   new_user["hashed_password"] = hash_password(new_user["password"])
   del new_user["password"]
+  print("This is the candidate user")
+  print(cand_user)
+
+  new_user["id"] = str(new_user["id"])
 
   new_user = UserInDb(**new_user)
 
@@ -69,7 +73,7 @@ async def create_new_user(cand_user: NewUser):
   save_db(users_db, USERS_DB_PATH)
 
   access_token_expires = ACCESS_TOKEN_EXPIRE_MINUTES
-  access_token = create_access_token(data={"sub": new_user.id}, expires_delta=access_token_expires)
+  access_token = create_access_token(data={"sub": new_user.id}, expires_delta=timedelta(minutes=access_token_expires))
 
   return {"access_token": access_token, "token_type": "bearer"}
 

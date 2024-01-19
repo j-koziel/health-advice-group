@@ -3,6 +3,7 @@ import { Wind, Sunrise, Sunset, MoveUp, Droplet, Sun } from "lucide-react";
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
+import { HealthAdvice } from "./HealthAdvice";
 
 export function WeatherDisplay({ weatherData, units, displayStyle }) {
   if (displayStyle === "compact")
@@ -145,14 +146,7 @@ export function WeatherDisplay({ weatherData, units, displayStyle }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-y-4 md:items-start">
-          <h1 className="text-5xl font-bold">Our Advice:</h1>
-          <ul className="flex flex-col items-center gap-y-12 text-4xl md:items-start">
-            <li>You should probably put on some sunscreen</li>
-            <li>Drink plenty of water</li>
-            <li>Wear a mask idk</li>
-          </ul>
-        </div>
+        <HealthAdvice />
       </div>
     );
   }

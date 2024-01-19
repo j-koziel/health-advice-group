@@ -13,7 +13,12 @@ export function Header() {
   return (
     <div className="w-full h-fit flex flex-col" id="header">
       <div className="relative w-full h-fit flex flex-col gap-2 items-center justify-between p-4 bg-background text-foreground border-b-2 border-foreground md:flex-row">
-        <h1 className="md:text-2xl text-lg font-bold">Health Advice Group</h1>
+        <h1
+          className="bg-transparent border-none text-lg font-bold cursor-pointer transition-drop-shadow hover:drop-shadow-lg md:text-2xl"
+          onClick={() => navigate("/")}
+        >
+          Health Advice Group
+        </h1>
         <div
           onClick={() => {
             setIsMenuOpen(!isMenuOpen);

@@ -8,7 +8,7 @@ export function Input({
 }) {
   return (
     <div className={className}>
-      <label labelFor={id} className="text-2xl">
+      <label htmlFor={id} className="text-2xl">
         {labelText}
       </label>
       <input

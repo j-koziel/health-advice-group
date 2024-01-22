@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 import { Input } from "../components/Input";
 import { useAuth } from "../context/AuthContext";
 import { config } from "../settings/config";
 import { toast, ToastContainer } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export function SignUpForm() {
   const navigate = useNavigate();
@@ -35,25 +35,33 @@ export function SignUpForm() {
               e.preventDefault();
 
               if (password !== passwordConfirm) {
-                throw Error("Your passwords do not match!!!")
+                throw Error("Your passwords do not match!!!");
               }
 
-              const res = await axios.post(`${config.backendUrl}/api/v1/users`, {
-                name,
-                email,
-                password,
-              });
-
-              console.log(res.data);
+              const res = await axios.post(
+                `${config.backendUrl}/api/v1/users`,
+                {
+                  name,
+                  email,
+                  password,
+                }
+              );
 
               setAccessToken(res.data.access_token);
               localStorage.setItem("accessToken", res.data.access_token);
 
               navigate("/dashboard");
             } catch (err) {
-              toast.error(err instanceof AxiosError ? err.response.data.detail : err.message, {style: {
-                backgroundColor: "#242929",
-              }})
+              toast.error(
+                err instanceof AxiosError
+                  ? err.response.data.detail
+                  : err.message,
+                {
+                  style: {
+                    backgroundColor: "#242929",
+                  },
+                }
+              );
             }
           }}
           className="h-full w-full flex flex-col gap-y-5 justify-evenly items-center"
@@ -119,8 +127,12 @@ export function SignUpForm() {
           />
         </form>
       </motion.div>
-      <ToastContainer position="bottom-right" autoClose={3000} theme="dark" draggable={true}/>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        theme="dark"
+        draggable={true}
+      />
     </div>
-
   );
 }

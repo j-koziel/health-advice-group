@@ -75,7 +75,9 @@ export function WeatherDisplay({ weatherData, units, displayStyle }) {
         </div>
       </div>
     );
-  else {
+  else if (displayStyle === "weather-forecast") {
+    return <div className="w-full"></div>;
+  } else {
     return (
       <div className="w-full flex flex-col gap-y-8 items-center md:flex-row md:justify-around md:items-center md:gap-x-12">
         <div className="flex flex-col items-center md:flex-row justify-center text-foreground">

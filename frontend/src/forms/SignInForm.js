@@ -71,6 +71,15 @@ export function SignInForm() {
           value="Sign In"
           className="text-xl bg-secondary text-primary p-2 rounded-md cursor-pointer hover:shadow-xl hover:bg-altBackground hover:text-altForeground transition-all"
         />
+        <span>
+          Don't have an account?{" "}
+          <a
+            href="/sign-up"
+            className="underline transition-all hover:font-bold"
+          >
+            Sign up!
+          </a>
+        </span>
       </form>
     </motion.div>
   );

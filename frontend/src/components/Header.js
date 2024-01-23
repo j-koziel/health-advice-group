@@ -14,7 +14,7 @@ export function Header() {
     <div className="w-full h-fit flex flex-col" id="header">
       <div className="relative w-full h-fit flex flex-col gap-2 items-center justify-between p-4 bg-background text-foreground border-b-2 border-foreground md:flex-row">
         <h1
-          className="bg-transparent border-none text-lg font-bold cursor-pointer transition-drop-shadow hover:drop-shadow-lg md:text-2xl"
+          className="bg-transparent border-none text-lg font-bold cursor-pointer transition-all hover:drop-shadow-lg md:text-2xl"
           onClick={() => navigate("/")}
         >
           Health Advice Group

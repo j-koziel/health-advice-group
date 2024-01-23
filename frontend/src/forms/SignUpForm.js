@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export function SignUpForm() {
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +30,6 @@ export function SignUpForm() {
         <form
           onSubmit={async (e) => {
             try {
-              setError(false);
               e.preventDefault();
 
               if (password !== passwordConfirm) {
@@ -123,8 +121,17 @@ export function SignUpForm() {
           <input
             type="submit"
             value="Sign Up"
-            className="text-xl bg-secondary text-primary p-2 rounded-md cursor-pointer hover:shadow-xl hover:bg-altBackground hover:text-altForeground transition-all"
+            className="text-xl bg-secondary text-foreground p-2 rounded-md cursor-pointer hover:shadow-xl hover:bg-altBackground hover:text-altForeground transition-all"
           />
+          <span>
+            Already have an account?{" "}
+            <a
+              href="/sign-in"
+              className="underline transition-all hover:font-bold"
+            >
+              Sign in!
+            </a>
+          </span>
         </form>
       </motion.div>
       <ToastContainer

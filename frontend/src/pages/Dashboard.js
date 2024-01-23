@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
+import { toast, ToastContainer } from "react-toastify";
 
 import { DashboardWidget } from "../components/DashboardWidget";
 import { AirQualityDash } from "../components/AirQualityDash";
@@ -11,22 +13,22 @@ import { getOpenWeatherMapData } from "../utils/get-data";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
 import { useWeatherUnits } from "../context/UnitsContext";
-import {toast, ToastContainer} from "react-toastify"
 
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 export function Dashboard() {
   const [weatherData, setWeatherData] = useState(null);
   const [airQualityData, setAirQualityData] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { accessToken, me } = useAuth();
   const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
-    
+    if (!accessToken) navigate("/sign-in");
+
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
@@ -45,16 +47,17 @@ export function Dashboard() {
     me(accessToken, setUserData);
 
     setIsLoading(false);
-
-    
-  }, [preferredUnits, me, accessToken]);
+  }, [preferredUnits]);
 
   useEffect(() => {
-    userData && toast.success(`Welcome back, ${userData.name}!!!`, {style: {
-      backgroundColor: "#242929",
-      color: "#ECF5F5"
-    }})
-  }, [userData])
+    userData &&
+      toast.success(`Welcome back, ${userData.name}!!!`, {
+        style: {
+          backgroundColor: "#242929",
+          color: "#ECF5F5",
+        },
+      });
+  }, [userData]);
 
   const dashboardItems = [
     weatherData && (
@@ -78,8 +81,6 @@ export function Dashboard() {
       </div>
     );
 
-
-
   return (
     <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:flex-wrap lg:h-screen">
       {dashboardItems.map((dashItem, i) => {
@@ -96,7 +97,12 @@ export function Dashboard() {
           </motion.div>
         );
       })}
-      <ToastContainer position="bottom-right" draggable={true} transition="zoom" limit={1}/>
+      <ToastContainer
+        position="bottom-right"
+        draggable={true}
+        transition="zoom"
+        limit={1}
+      />
     </div>
   );
 }

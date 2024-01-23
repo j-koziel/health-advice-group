@@ -27,10 +27,12 @@ def health_risks_based_on_temp(temp: int, units: str) -> list[str]:
   if units == "metric" and temp > 25 or units == "imperial" and temp > 77:
     return advice_strings["health_risks"]["high_temp"]
   elif units == "metric" and temp < 8 or units == "imperial" and temp < 46:
-    return advice_strings["health_risks"]
+    return advice_strings["health_risks"]["low_temp"]
+  else:
+    return ["The temperature is normal and there are minimal health risks"]
 
 def create_health_advice(temp: int, uv_index: int, units: str) -> HealthAdviceRes:
-  health_advice_res = HealthAdviceRes(temp_advice=create_uv_based_health_advice(temp, units), uv_advice=create_uv_based_health_advice(uv_index), health_risks=health_risks_based_on_temp(temp, units))
+  health_advice_res = HealthAdviceRes(temp_advice=create_temp_based_health_advice(temp, units), uv_advice=create_uv_based_health_advice(uv_index), health_risks=health_risks_based_on_temp(temp, units))
 
 
   return health_advice_res

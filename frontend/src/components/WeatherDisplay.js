@@ -258,7 +258,12 @@ export function WeatherDisplay({
             </div>
           </div>
         </div>
-        <HealthAdvice />
+        <HealthAdvice
+          temp={Math.round(weatherData.main.temp)}
+          uvIndex={
+            4 /* This is a placeholder value since the API i am using charges for uv information */
+          }
+        />
       </div>
     );
   }

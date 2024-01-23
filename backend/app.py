@@ -6,6 +6,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from routes import users
+from routes import health_advice
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
 app = FastAPI()
@@ -33,3 +34,4 @@ async def root():
   return "Hello"
 
 app.include_router(users.router)
+app.include_router(health_advice.router)

@@ -8,6 +8,7 @@ from slowapi.middleware import SlowAPIMiddleware
 
 from routes import users
 from routes import health_advice
+from routes import articles
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
 app = FastAPI()
@@ -38,3 +39,4 @@ async def root():
 
 app.include_router(users.router)
 app.include_router(health_advice.router)
+app.include_router(articles.router)

@@ -9,6 +9,7 @@ import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
 import { WeatherForecast } from "./pages/WeatherForecast";
 import { AboutUs } from "./pages/AboutUs";
+import { Articles } from "./pages/Articles";
 
 function App() {
   const darkMode = useDarkMode(false);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weather" element={<WeatherForecast />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/articles" element={<Articles />} />
       </Routes>
 
       <Footer />

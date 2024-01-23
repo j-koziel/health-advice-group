@@ -7,7 +7,8 @@ import { Routes, Route } from "react-router-dom";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
-import { WeatherForecast } from "./pages/WeatherForecast"
+import { WeatherForecast } from "./pages/WeatherForecast";
+import { AboutUs } from "./pages/AboutUs";
 
 function App() {
   const darkMode = useDarkMode(false);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weather" element={<WeatherForecast />} />
+        <Route path="/about-us" element={<AboutUs />} />
       </Routes>
 
       <Footer />

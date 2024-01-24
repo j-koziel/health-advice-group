@@ -68,7 +68,7 @@ export function AboutUs() {
             velit justo sed neque. Sed dapibus lacus vel volutpat feugiat.
           </p>
         </main>
-        <footer className="flex justify-evenly">
+        <footer className="flex flex-col gap-y-8 md:flex-row md:justify-evenly">
           {staffData.map((staffMember, i) => (
             <StaffProfileItem
               key={i}

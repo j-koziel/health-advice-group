@@ -40,7 +40,7 @@ export function LocationSearch({
         }}
       >
         <input
-          className="w-[250px] border-none outline-none bg-background placeholder:text-2xl placeholder:text-foreground placeholder:text-opacity-75"
+          className="w-[250px] border-none outline-none bg-background text-2xl placeholder:text-2xl placeholder:text-foreground placeholder:text-opacity-75"
           type="text"
           placeholder="Search for a location..."
           value={locationQuery}
@@ -48,7 +48,7 @@ export function LocationSearch({
           autoFocus
         />
         <input
-          className="border-solid border-foreground border-2 border-opacity-50 rounded-md p-2 transition-all hover:text-primary hover:border-primary hover:border-opacity-100"
+          className="border-solid border-foreground border-2 border-opacity-50 rounded-md p-2 cursor-pointer transition-all hover:text-primary hover:border-primary hover:border-opacity-100"
           type="submit"
           value="Search"
         />

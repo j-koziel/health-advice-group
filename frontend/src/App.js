@@ -10,9 +10,12 @@ import { Dashboard } from "./pages/Dashboard";
 import { WeatherForecast } from "./pages/WeatherForecast";
 import { AboutUs } from "./pages/AboutUs";
 import { Articles } from "./pages/Articles";
+import { Article } from "./pages/Article";
+import { useState } from "react";
 
 function App() {
   const darkMode = useDarkMode(false);
+  const [selectedArticle, setSelectedArticle] = useState("");
 
   return (
     <div className={`${darkMode.value ? "dark" : ""}`}>
@@ -25,7 +28,14 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weather" element={<WeatherForecast />} />
         <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/articles" element={<Articles />} />
+        <Route
+          path="/articles"
+          element={<Articles setSelectedArticle={setSelectedArticle} />}
+        />
+        <Route
+          path={`/articles/${selectedArticle}`}
+          element={<Article selectedArticle={selectedArticle} />}
+        />
       </Routes>
 
       <Footer />

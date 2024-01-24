@@ -14,6 +14,7 @@ import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
 import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
+import { BackButton } from "./BackButton";
 
 export function WeatherDisplay({
   weatherData,
@@ -94,14 +95,7 @@ export function WeatherDisplay({
   else if (displayStyle === "weather-forecast") {
     return (
       <div className="h-full w-full flex flex-col items-center justify-center relative">
-        <button
-          onClick={() => {
-            setPageState && setPageState("location");
-          }}
-          className="flex border border-solid border-primary rounded-md p-2 absolute left-0 top-0 mt-3 ml-3 transition-all duration-400 ease-in delay-0 hover:gap-x-3"
-        >
-          <ArrowLeft /> Go back
-        </button>
+        <BackButton newPageState="location" setPageState={setPageState} />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { ease: "easeIn", delay: 1.2 } }}

@@ -67,7 +67,9 @@ export function Dashboard() {
         displayStyle="compact"
       />
     ),
-    <HealthAdvice />,
+    weatherData && (
+      <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
+    ),
     airQualityData && (
       <AirQualityDash airQualityData={airQualityData} dashboardType="compact" />
     ),

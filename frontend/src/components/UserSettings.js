@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Checkbox } from "@nextui-org/react";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 
 import { Input } from "./Input";
@@ -17,7 +18,9 @@ export function UserSettings({ userData }) {
   );
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const { accessToken } = useAuth();
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+  const { accessToken, updatePassword } = useAuth();
 
   const handleUnitChange = (
     isSelected,
@@ -39,18 +42,14 @@ export function UserSettings({ userData }) {
           className="md:w-1/2 flex flex-col gap-y-4"
           onSubmit={async (e) => {
             e.preventDefault();
-            await axios.put(
-              `${config.backendUrl}/api/v1/users/me`,
-              { name: newName, email: newEmail },
-              {
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                },
-              }
-            );
+
+            if (newPassword !== newPasswordConfirm)
+              alert("The passwords need to match");
+
+            await updatePassword(newPassword, accessToken);
           }}
         >
-          <Input
+          {/* <Input
             type="text"
             placeholder={userData.name}
             labelText="Name"
@@ -67,6 +66,26 @@ export function UserSettings({ userData }) {
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
             className="flex flex-col gap-2"
+          /> */}
+          <Input
+            type="password"
+            placeholder="••••••••"
+            labelText="Change Password"
+            id="settings-password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="flex flex-col gap-2"
+            required
+          />
+          <Input
+            type="password"
+            placeholder="••••••••"
+            labelText="Confirm new password"
+            id="settings-password-confirm"
+            value={newPasswordConfirm}
+            onChange={(e) => setNewPasswordConfirm(e.target.value)}
+            className="flex flex-col gap-2"
+            required
           />
           <input
             type="submit"

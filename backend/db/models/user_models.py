@@ -24,3 +24,6 @@ class UserInDb(User):
 class UpdatedUser(BaseModel):
   name: str
   email: str
+
+class UpdatedPassword(BaseModel):
+  new_password: str

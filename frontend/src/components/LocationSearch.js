@@ -13,6 +13,7 @@ export function LocationSearch({
 }) {
   const [locationData, setLocationData] = useState(null);
   const [locationQuery, setLocationQuery] = useState("");
+  const [selectedData, setSelectedData] = useState("");
 
   const { preferredUnits } = useWeatherUnits();
 
@@ -47,6 +48,7 @@ export function LocationSearch({
           onChange={(e) => setLocationQuery(e.target.value)}
           autoFocus
         />
+        <input type="button" />
         <input
           className="border-solid border-foreground border-2 border-opacity-50 rounded-md p-2 cursor-pointer transition-all hover:text-primary hover:border-primary hover:border-opacity-100"
           type="submit"

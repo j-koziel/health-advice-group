@@ -7,10 +7,10 @@ from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 
 from db.db_utils import get_user, save_db
-from db.models.user_models import UserInDb, NewUser, User, UpdatedUser
+from db.models.user_models import UpdatedPassword, UserInDb, NewUser, User, UpdatedUser
 from db.models.auth_models import TokenData, Token
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, USERS_DB_PATH, users_db
-from utils.auth import authenticate_user, create_access_token, hash_password
+from utils.auth import authenticate_user, create_access_token, hash_password, verify_password
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/users/token")
 
@@ -102,7 +102,21 @@ async def update_me(current_user: Annotated[User, Depends(get_current_user)], up
   if updated_user_fields.email:
     curr_user_in_db.email = updated_user_fields.email
 
-  users_db
-
+  # users_db
 
   return {"msg": "the user has been updated successfully", "user": updated_user_fields}
+
+@router.put("/me/password", tags=["user"])
+async def update_password(current_user: Annotated[User, Depends(get_current_user)], updated_password: UpdatedPassword):
+  for user in users_db:
+    if user.id == current_user.id:
+      user.hashed_password = hash_password(updated_password.new_password)
+
+  if not current_user:
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="That user does not exist :(")
+  
+
+  return {"msg": "The password has been updated successfully"}
+  
+
+

@@ -25,8 +25,22 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   }
 
+  async function updatePassword(newPassword, token) {
+    try {
+      await axios.put(
+        `${config.backendUrl}/api/v1/users/me/password`,
+        { new_password: newPassword },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ accessToken, setAccessToken, me, logout }}>
+    <AuthContext.Provider
+      value={{ accessToken, setAccessToken, me, updatePassword, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -118,6 +118,22 @@ export function SignUpForm() {
             maxLength={100}
             required
           />
+          <div className="flex gap-y-4">
+            <input type="checkbox" id="tncs-read" required />
+            <label htmlFor="tncs-read">
+              Have you read the{" "}
+              <a
+                className="underline transition-all hover:font-bold"
+                href="/tncs"
+                target="_blank"
+                rel="noreferrer"
+              >
+                terms and conditions
+              </a>
+              ?
+            </label>
+          </div>
+
           <input
             type="submit"
             value="Sign Up"

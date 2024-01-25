@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 
 import { ArticleItem } from "../components/ArticleItem";
 import { getArticles } from "../utils/get-data";
-import { config } from "../settings/config";
 
-export function Articles({ setSelectedArticle }) {
+export function Articles() {
   const [articleData, setArticleData] = useState([]);
 
   useEffect(() => {
@@ -22,14 +21,10 @@ export function Articles({ setSelectedArticle }) {
       </h1>
       <div className="flex flex-wrap justify-center gap-4 mb-10">
         {articleData &&
-          articleData.map((article, i) => (
-            <ArticleItem
-              key={i}
-              title={article.title}
-              imageUrl={`${config.backendUrl}${article.title_image_path}`}
-              setSelectedArticle={setSelectedArticle}
-            />
-          ))}
+          articleData.map((article, i) => {
+            return <ArticleItem key={i} article={article} />;
+          })}
+        {!articleData && <div>Loading articles...</div>}
       </div>
     </div>
   );

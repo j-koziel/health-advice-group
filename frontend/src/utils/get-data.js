@@ -33,3 +33,15 @@ export async function getArticles() {
     console.error(err);
   }
 }
+
+export async function getArticle(articleTitle) {
+  try {
+    const res = await axios.get(
+      `${config.backendUrl}/api/v1/articles/${articleTitle}`
+    );
+
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+}

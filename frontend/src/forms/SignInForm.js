@@ -7,7 +7,7 @@ import { Input } from "../components/Input";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
 
-export function SignInForm() {
+export function SignInForm({setAuthError}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAccessToken } = useAuth();
@@ -22,7 +22,9 @@ export function SignInForm() {
       <h1 className="text-5xl m-0 ">Sign In</h1>
       <form
         onSubmit={async (e) => {
-          e.preventDefault();
+          try {
+            e.preventDefault();
+            setAuthError(null)
           const res = await axios.post(
             `${config.backendUrl}/api/v1/users/token`,
             {
@@ -40,6 +42,12 @@ export function SignInForm() {
           setAccessToken(res.data.access_token);
 
           navigate("/dashboard");
+          return
+          } catch (err) {
+            console.log(err.response.data.detail)
+            setAuthError(err.response.data.detail)
+          }
+          
         }}
         className="h-1/2 w-full flex flex-col justify-evenly items-center"
       >

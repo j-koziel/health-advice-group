@@ -47,8 +47,8 @@ export function AirQualityDash({ airQualityData, dashboardType }) {
     );
   } else {
     return (
-      <div className="w-full h-full text-center">
-        <div className="w-full text-foreground flex flex-col items-center gap-8 md:flex-row">
+      <div className="w-full h-full flex flex-col justify-center items-center text-center">
+        <div className="w-full text-foreground flex flex-col justify-center items-center gap-8 md:flex-row">
           <div className="flex flex-col gap-y-4">
             <div className="flex">
               <CircularProgress
@@ -191,7 +191,7 @@ export function AirQualityDash({ airQualityData, dashboardType }) {
             </div>
           </div>
         </div>
-        <div className="mt-4 text-left w-fit">
+        <div className="mt-4 text-left">
           <p className="underline opacity-60 cursor-pointer" onClick={onOpen}>
             What do these numbers mean?
           </p>

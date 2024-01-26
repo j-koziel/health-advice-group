@@ -4,8 +4,9 @@ import { LocationSearch } from "../components/LocationSearch";
 import { WeatherDisplay } from "../components/WeatherDisplay";
 import { AirQualityDash } from "../components/AirQualityDash";
 import { useWeatherUnits } from "../context/UnitsContext";
+import { BackButton } from "../components/BackButton";
 
-export function WeatherForecast() {
+export function WeatherAndAirQuality() {
   const [pageState, setPageState] = useState("location");
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState(null);
@@ -13,7 +14,8 @@ export function WeatherForecast() {
   const { preferredUnits } = useWeatherUnits();
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-background text-foreground">
+    <div className="w-full h-screen flex items-center justify-center bg-background text-foreground relative">
+      {pageState !== "location" && <BackButton newPageState="location" setPageState={setPageState}/>}
       {pageState === "location" ? (
         <LocationSearch
           setPageState={setPageState}

@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
-import { WeatherForecast } from "./pages/WeatherForecast";
+import { WeatherAndAirQuality } from "./pages/WeatherAndAirQuality";
 import { AboutUs } from "./pages/AboutUs";
 import { Articles } from "./pages/Articles";
 import { Article } from "./pages/Article";
@@ -25,7 +25,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/weather" element={<WeatherForecast />} />
+        <Route path="/location-search" element={<WeatherAndAirQuality />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:title" element={<Article />} />

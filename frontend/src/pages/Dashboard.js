@@ -27,7 +27,12 @@ export function Dashboard() {
   const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
-    if (!accessToken) navigate("/sign-in");
+    if (!accessToken) 
+    {
+      toast.error("You are not logged in!!!")
+      navigate("/sign-in");
+      return;
+    }
 
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {

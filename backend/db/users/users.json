@@ -26,5 +26,12 @@
         "email": "example2@gmail.com",
         "preferred_locations": [],
         "hashed_password": "$2b$12$.BLNkzIt1CNqIztnTvAOieCV0pBqLAd.PaghDT3ej0yo6QhDmhX3S"
+    },
+    {
+        "id": "2c45cb25-0382-4827-a878-07e1792563b5",
+        "name": "blahblah",
+        "email": "blahblah@gmail.com",
+        "preferred_locations": [],
+        "hashed_password": "$2b$12$vLIfHVYev2P1Al5a3lkw.Oc2f2gYX12mVp5Irm9n6LCVTq2UdFGUy"
     }
 ]

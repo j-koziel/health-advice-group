@@ -1,8 +1,8 @@
 const baseLinks = [
   { path: "/sign-in", label: "Sign In" },
   { path: "/sign-up", label: "Sign Up" },
-  { path: "/weather", label: "Weather" },
-  { path: "/air-quality", label: "Air Quality" },
+  { path: "/location-search", label: "Weather" },
+  { path: "/location-search", label: "Air Quality" },
   { path: "/about-us", label: "About Us" },
   { path: "/articles", label: "Articles" },
 ];

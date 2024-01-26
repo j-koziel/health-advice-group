@@ -94,8 +94,7 @@ export function WeatherDisplay({
     );
   else if (displayStyle === "weather-forecast") {
     return (
-      <div className="h-full w-full flex flex-col items-center justify-center relative">
-        <BackButton newPageState="location" setPageState={setPageState} />
+      <div className="h-full w-full flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { ease: "easeIn", delay: 1.2 } }}

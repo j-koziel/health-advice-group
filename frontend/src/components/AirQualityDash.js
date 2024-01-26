@@ -20,7 +20,7 @@ export function AirQualityDash({ airQualityData, dashboardType }) {
     value: "text-6xl",
     label: "text-2xl",
     track: "stroke-accent dark:opacity-60",
-    indicator: "stroke-textColor",
+    // indicator: "stroke-textColor",
   };
 
   if (dashboardType === "compact") {

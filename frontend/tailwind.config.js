@@ -15,6 +15,7 @@ module.exports = {
       themes: {
         light: {
           colors: {
+            default: "#ECF5F5",
             background: "#96BBBB",
             foreground: "#242929",
             textColor: "#ECF5F5",
@@ -29,6 +30,7 @@ module.exports = {
         },
         dark: {
           colors: {
+            default: "#ECF5F5",
             background: "#242929",
             foreground: "#ECF5F5",
             textColor: "#ECF5F5",

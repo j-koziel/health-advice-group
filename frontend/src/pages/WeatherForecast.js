@@ -21,17 +21,19 @@ export function WeatherForecast() {
           setForecastData={setForecastData}
           setAirQualityData={setAirQualityData}
         />
-      ) : pageState ===
-        "weather"(
-          <WeatherDisplay
-            displayStyle="weather-forecast"
-            weatherData={weatherData}
-            units={preferredUnits}
-            forecastData={forecastData}
-            setPageState={setPageState}
-          />
-        ) ? (
-        <AirQualityDash dashboardType="full" airQualityData={airQualityData} />
+      ) : pageState === "weather" ? (
+        <WeatherDisplay
+          displayStyle="weather-forecast"
+          weatherData={weatherData}
+          units={preferredUnits}
+          forecastData={forecastData}
+          setPageState={setPageState}
+        />
+      ) : pageState === "air-quality" ? (
+        <AirQualityDash
+          dashboardType="full"
+          airQualityData={airQualityData.list[0]}
+        />
       ) : null}
     </div>
   );

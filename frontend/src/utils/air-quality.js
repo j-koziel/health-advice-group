@@ -8,7 +8,7 @@ export const airQualityDescription = (aqi) => {
 };
 
 export const airQualityColour = (val, minVal, midVal, maxVal) => {
-  if (val >= minVal && val < midVal) return "primary";
+  if (val >= minVal && val < midVal) return "default";
   if (val >= midVal && val < maxVal) return "warning";
   if (val >= maxVal) return "danger";
 };

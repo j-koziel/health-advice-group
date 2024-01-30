@@ -38,6 +38,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-x-2">
           <CircleUser
+            aria-label="Enter your dashboard"
             className="cursor-pointer rounded-full transition-shadow hover:shadow-lg"
             onClick={() => navigate("/dashboard")}
           />

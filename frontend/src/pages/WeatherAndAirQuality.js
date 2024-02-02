@@ -15,7 +15,9 @@ export function WeatherAndAirQuality() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-background text-foreground relative">
-      {pageState !== "location" && <BackButton newPageState="location" setPageState={setPageState}/>}
+      {pageState !== "location" && (
+        <BackButton newPageState="location" setPageState={setPageState} />
+      )}
       {pageState === "location" ? (
         <LocationSearch
           setPageState={setPageState}

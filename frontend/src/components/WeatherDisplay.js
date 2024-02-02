@@ -5,24 +5,27 @@ import {
   MoveUp,
   Droplet,
   Sun,
-  ArrowLeft,
+  Star,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
 import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
-import { BackButton } from "./BackButton";
+import { config } from "../settings/config";
+import { useAuth } from "../context/AuthContext";
 
 export function WeatherDisplay({
   weatherData,
   units,
   displayStyle,
   forecastData = null,
-  setPageState = null,
 }) {
+  const { accessToken } = useAuth();
+
   if (displayStyle === "compact")
     return (
       <div className="w-full flex flex-col items-center md:flex-row justify-center text-foreground">
@@ -98,8 +101,21 @@ export function WeatherDisplay({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { ease: "easeIn", delay: 1.2 } }}
-          className="flex items-center justify-center mb-10"
+          className="flex items-center justify-center mb-10 relative"
         >
+          <button
+            className="absolute top-0 right-10"
+            onClick={async (e) => {
+              const res = await axios.put(
+                `http://localhost:8000/api/v1/users/favourite-locations`,
+                { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
+                { headers: { Authorization: `Bearer ${accessToken}` } }
+              );
+              console.log(res.data);
+            }}
+          >
+            <Star />
+          </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
             alt="weather"

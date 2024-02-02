@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 
 from db.db_utils import get_user, save_db
-from db.models.user_models import UpdatedPassword, UserInDb, NewUser, User, UpdatedUser
+from db.models.user_models import Location, UpdatedPassword, UserInDb, NewUser, User, UpdatedUser
 from db.models.auth_models import TokenData, Token
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, USERS_DB_PATH, users_db
 from utils.auth import authenticate_user, create_access_token, hash_password, verify_password
@@ -119,4 +119,16 @@ async def update_password(current_user: Annotated[User, Depends(get_current_user
   return {"msg": "The password has been updated successfully"}
   
 
+@router.put("/favourite-locations", tags=["user", "location"])
+async def add_new_location(current_user: Annotated[User, Depends(get_current_user)], location: Location):
+  if not location:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please provide a location to add")
+  
+  if not current_user:
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Pleas login to add new favourite locations")
+  
+  for user in users_db:
+    if user.id == current_user.id:
+      user.preferred_locations.append(location)
 
+  return {"msg": "This location was added successfully"}

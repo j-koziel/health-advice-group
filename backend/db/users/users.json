@@ -10,7 +10,40 @@
         "id": "b951a6ea-b2b6-49ae-a215-ba1458510e96",
         "name": "John Doe",
         "email": "example@gmail.com",
-        "preferred_locations": [],
+        "preferred_locations": [
+            {
+                "lat": 42.9832,
+                "lon": -81.2434
+            },
+            {
+                "lat": 51.525,
+                "lon": -0.0907
+            },
+            {
+                "lat": 51.545,
+                "lon": -0.4817
+            },
+            {
+                "lat": 51.5075,
+                "lon": -0.4188
+            },
+            {
+                "lat": 51.5115,
+                "lon": -0.3108
+            },
+            {
+                "lat": 51.5075,
+                "lon": -0.3785
+            },
+            {
+                "lat": 51.5156,
+                "lon": -0.092
+            },
+            {
+                "lat": 51.5085,
+                "lon": -0.1257
+            }
+        ],
         "hashed_password": "$2b$12$lB6ogoP2.aXgwDugMBlAoOA.j91nJilTxDI6OrMhdO3Ib/Rxp25pW"
     },
     {

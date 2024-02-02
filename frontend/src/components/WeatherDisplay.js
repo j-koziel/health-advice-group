@@ -17,6 +17,8 @@ import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
+import { useFavLocations } from "../context/FavLocationsContext";
+import { useEffect, useState } from "react";
 
 export function WeatherDisplay({
   weatherData,
@@ -24,7 +26,32 @@ export function WeatherDisplay({
   displayStyle,
   forecastData = null,
 }) {
+  const [isFavourited, setIsFavourited] = useState(false)
+  
   const { accessToken } = useAuth();
+  const {favLocations, setFavLocations} = useFavLocations()
+
+  useEffect(() => {
+    async function checkIfLocationIsFavourited() {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`, {headers: {Authorization: `Bearer ${accessToken}`}})
+
+        if (res.data.is_favourited) {
+          setIsFavourited(true)
+          return
+        }
+
+        return
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    checkIfLocationIsFavourited()
+  }, [])
+  
+  
+
 
   if (displayStyle === "compact")
     return (
@@ -104,17 +131,32 @@ export function WeatherDisplay({
           className="flex items-center justify-center mb-10 relative"
         >
           <button
-            className="absolute top-0 right-10"
+            className="absolute -top-6 right-12"
             onClick={async (e) => {
-              const res = await axios.put(
-                `http://localhost:8000/api/v1/users/favourite-locations`,
-                { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
-                { headers: { Authorization: `Bearer ${accessToken}` } }
-              );
-              console.log(res.data);
+              try {
+                if (isFavourited) {
+                  const delLocationRes = await axios.delete(`http://localhost:8000/api/v1/users/favourite-locations?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`, {headers: {Authorization: `Bearer ${accessToken}`}})  
+                  setIsFavourited(false)
+                  return
+                }
+
+                const res = await axios.put(
+                  `http://localhost:8000/api/v1/users/favourite-locations`,
+                  { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
+                  { headers: { Authorization: `Bearer ${accessToken}` } }
+                );
+                
+  
+                setFavLocations([...favLocations, {lat: weatherData.coord.lat, lon: weatherData.coord.lon}])
+                localStorage.setItem("favLocations", JSON.stringify([...favLocations, {lat: weatherData.coord.lat, lon: weatherData.coord.lon}]))
+                setIsFavourited(true)
+                return
+              } catch (err) {
+                console.error(err)
+              }
             }}
           >
-            <Star />
+            <Star className="hover:animate-fill"/>
           </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}

@@ -7,7 +7,17 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        fillAnimation: {
+          "0%": {fill: ""},
+          "100%": {fill: "white"}
+        }
+      },
+      animation: {
+        fill: "fillAnimation 1s ease-in-out"
+      }
+    },
   },
   darkMode: "class",
   plugins: [

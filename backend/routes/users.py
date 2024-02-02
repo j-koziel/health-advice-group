@@ -1,3 +1,4 @@
+from email.policy import HTTP
 from typing import Annotated, Union
 from datetime import timedelta
 from uuid import uuid4
@@ -114,21 +115,67 @@ async def update_password(current_user: Annotated[User, Depends(get_current_user
 
   if not current_user:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="That user does not exist :(")
+
+  save_db(users_db, USERS_DB_PATH)
   
 
   return {"msg": "The password has been updated successfully"}
   
 
 @router.put("/favourite-locations", tags=["user", "location"])
-async def add_new_location(current_user: Annotated[User, Depends(get_current_user)], location: Location):
-  if not location:
+async def add_new_location(current_user: Annotated[User, Depends(get_current_user)], new_location: Location):
+  if not new_location:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please provide a location to add")
   
   if not current_user:
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Pleas login to add new favourite locations")
   
-  for user in users_db:
+  for location in current_user.preferred_locations:
+    if location.lat == new_location.lat and location.lon == new_location.lon:
+      raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="You have already added this location")
+
+  users_db_copy = users_db
+  
+  for user in users_db_copy:
     if user.id == current_user.id:
-      user.preferred_locations.append(location)
+      user.preferred_locations.append(new_location)
+
+  save_db(users_db_copy, USERS_DB_PATH)
 
   return {"msg": "This location was added successfully"}
+
+@router.delete("/favourite-locations", tags=["user", "location"])
+async def delete_location(current_user: Annotated[User, Depends(get_current_user)], lat: float, lon: float):
+  if not lat or not lon:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please provide a location to delete")
+
+  if not current_user:
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="PLease login to delete locations")
+
+
+  users_db_copy = users_db
+
+  for user in users_db_copy:
+    if user.id == current_user.id:
+      for i, location in enumerate(user.preferred_locations):
+        if location.lat == lat and location.lon == lon:
+          del user.preferred_locations[i]
+
+  save_db(users_db_copy, USERS_DB_PATH)
+
+  return {"msg": "This location was removed successfully"}
+
+@router.get("/favourite-locations/is-favourited", tags=["user", "location"])
+async def is_location_favourited(current_user: Annotated[User, Depends(get_current_user)], lat: float, lon: float):
+  if not lat or not lon:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please provide a location to check")
+
+  if not current_user:
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Please log in")
+
+  for location in current_user.preferred_locations:
+    if location.lat == lat and location.lon == lon:
+      return {"is_favourited": True}
+
+  return {"is_favourited": False}
+  

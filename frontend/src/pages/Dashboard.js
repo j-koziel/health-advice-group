@@ -17,8 +17,8 @@ import { useWeatherUnits } from "../context/UnitsContext";
 import "react-toastify/dist/ReactToastify.css";
 
 export function Dashboard() {
-  const [weatherData, setWeatherData] = useState(null);
-  const [airQualityData, setAirQualityData] = useState(null);
+  const [weatherData, setWeatherData] = useState([]);
+  const [airQualityData, setAirQualityData] = useState([]);
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -44,11 +44,47 @@ export function Dashboard() {
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
       );
 
-      setWeatherData(currWeatherData);
-      setAirQualityData(currAirQualityData.list[0]);
+      setWeatherData([...weatherData, currWeatherData]);
+      setAirQualityData([...airQualityData, currAirQualityData.list[0]]);
     });
 
-    me(accessToken, setUserData);
+    const getData = async () => {
+      await me(accessToken, setUserData);
+    };
+
+    const getWeatherAtPreferredLocations = async () => {
+      const preferredLocationsWeatherData =
+        userData &&
+        (await Promise.all(
+          userData.preferred_locations.map(
+            async (location) =>
+              await getOpenWeatherMapData(
+                `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${config.weatherApiKey}&units=${preferredUnits}`
+              )
+          )
+        ));
+
+      setWeatherData([...weatherData, ...preferredLocationsWeatherData]);
+      return;
+    };
+
+    const getAirQualityAtPreferredLocations = async () => {
+      const preferredLocationsAirQualityData =
+        userData &&
+        (await Promise.all(
+          userData.preferred_locations.map(
+            async (location) =>
+              await getOpenWeatherMapData(
+                `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.lat}&lon=${location.lon}&appid=${config.airQualityApiKey}`
+              )
+          )
+        ));
+
+      console.log(preferredLocationsAirQualityData);
+    };
+
+    // getWeatherAtPreferredLocations();
+    getAirQualityAtPreferredLocations();
 
     setIsLoading(false);
   }, [preferredUnits]);
@@ -64,20 +100,20 @@ export function Dashboard() {
   }, [userData]);
 
   const dashboardItems = [
-    weatherData && airQualityData && (
-      <div>
-        <WeatherDisplay
-          weatherData={weatherData}
-          units={preferredUnits}
-          displayStyle="compact"
-        />
-        <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
-        <AirQualityDash
-          airQualityData={airQualityData}
-          dashboardType="compact"
-        />
-      </div>
-    ),
+    // weatherData && airQualityData && (
+    //   <div>
+    //     <WeatherDisplay
+    //       weatherData={weatherData}
+    //       units={preferredUnits}
+    //       displayStyle="compact"
+    //     />
+    //     <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
+    //     <AirQualityDash
+    //       airQualityData={airQualityData}
+    //       dashboardType="compact"
+    //     />
+    //   </div>
+    // ),
     userData && <UserSettings userData={userData} />,
   ];
 

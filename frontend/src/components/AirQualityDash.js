@@ -3,7 +3,7 @@ import { AirQualityInfoModal } from "./AirQualityInfoModal";
 import { useDisclosure } from "@nextui-org/react";
 import { airQualityColour, airQualityDescription } from "../utils/air-quality";
 
-export function AirQualityDash({ airQualityData, dashboardType }) {
+export function AirQualityDash({ airQualityData, dashboardType = "full" }) {
   // This controls the state of the NextUI modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 

@@ -93,7 +93,6 @@ export function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-            className="h-[500px]"
           >
             <AirQualityDash airQualityData={airQualityData} />
           </motion.div>

@@ -115,11 +115,11 @@ export function Dashboard() {
   }, [userData]);
 
   const dashboardItems = [
-    weatherData.length && airQualityData.length && userData && (
+    weatherData.length && userData && (
       <Carousel
         items={userData.preferred_locations.map((_, i) => {
           return (
-            <div>
+            <div className="w-[500px] flex flex-col items-center justify-center">
               <WeatherDisplay
                 weatherData={weatherData[i]}
                 units={preferredUnits}
@@ -129,13 +129,24 @@ export function Dashboard() {
                 temp={Math.round(weatherData[i].main.temp)}
                 uvIndex={4}
               />
-              <AirQualityDash
-                airQualityData={airQualityData[i].list[0]}
-                dashboardType="compact"
-              />
             </div>
           );
         })}
+        width={600}
+      />
+    ),
+    airQualityData.length && (
+      <Carousel
+        items={userData.preferred_locations.map((_, i) => (
+          <div>
+            <AirQualityDash
+              airQualityData={airQualityData[i].list[0]}
+              dashboardType="compact"
+              location={`${weatherData[i].name}, ${weatherData[i].sys.country}`}
+            />
+          </div>
+        ))}
+        width={300}
       />
     ),
     userData && <UserSettings userData={userData} />,

@@ -3,7 +3,11 @@ import { AirQualityInfoModal } from "./AirQualityInfoModal";
 import { useDisclosure } from "@nextui-org/react";
 import { airQualityColour, airQualityDescription } from "../utils/air-quality";
 
-export function AirQualityDash({ airQualityData, dashboardType = "full" }) {
+export function AirQualityDash({
+  airQualityData,
+  dashboardType = "full",
+  location = "current",
+}) {
   // This controls the state of the NextUI modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -23,6 +27,27 @@ export function AirQualityDash({ airQualityData, dashboardType = "full" }) {
     // indicator: "stroke-textColor",
   };
 
+  const renderLocation = () => {
+    if (location === "current")
+      return (
+        <p className="text-2xl mt-2">
+          The air quality in your area is{" "}
+          <span className="underline">
+            {airQualityDescription(airQualityData.main.aqi)}
+          </span>
+        </p>
+      );
+
+    return (
+      <p className="text-2xl mt-2">
+        The air quality in {location} is{" "}
+        <span className="underline">
+          {airQualityDescription(airQualityData.main.aqi)}
+        </span>
+      </p>
+    );
+  };
+
   if (dashboardType === "compact") {
     return (
       <div className="w-full h-full text-center text-foreground flex flex-col justify-center items-center">
@@ -37,12 +62,7 @@ export function AirQualityDash({ airQualityData, dashboardType = "full" }) {
           formatOptions={{}}
           size="lg"
         />
-        <p className="text-2xl mt-2">
-          The air quality in your area is{" "}
-          <span className="underline">
-            {airQualityDescription(airQualityData.main.aqi)}
-          </span>
-        </p>
+        {renderLocation()}
       </div>
     );
   } else {
@@ -196,14 +216,7 @@ export function AirQualityDash({ airQualityData, dashboardType = "full" }) {
             What do these numbers mean?
           </p>
         </div>
-        <div className="mt-4">
-          <p className="text-2xl">
-            The air quality in your area is{" "}
-            <span className="underline">
-              {airQualityDescription(airQualityData.main.aqi)}
-            </span>
-          </p>
-        </div>
+        <div className="mt-4">{renderLocation()}</div>
         <AirQualityInfoModal isOpen={isOpen} onOpenChange={onOpenChange} />
       </div>
     );

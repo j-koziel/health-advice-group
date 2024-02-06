@@ -27,9 +27,8 @@ export function Dashboard() {
   const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
-    if (!accessToken) 
-    {
-      toast.error("You are not logged in!!!")
+    if (!accessToken) {
+      toast.error("You are not logged in!!!");
       navigate("/sign-in");
       return;
     }
@@ -65,18 +64,19 @@ export function Dashboard() {
   }, [userData]);
 
   const dashboardItems = [
-    weatherData && (
-      <WeatherDisplay
-        weatherData={weatherData}
-        units={preferredUnits}
-        displayStyle="compact"
-      />
-    ),
-    weatherData && (
-      <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
-    ),
-    airQualityData && (
-      <AirQualityDash airQualityData={airQualityData} dashboardType="compact" />
+    weatherData && airQualityData && (
+      <div>
+        <WeatherDisplay
+          weatherData={weatherData}
+          units={preferredUnits}
+          displayStyle="compact"
+        />
+        <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
+        <AirQualityDash
+          airQualityData={airQualityData}
+          dashboardType="compact"
+        />
+      </div>
     ),
     userData && <UserSettings userData={userData} />,
   ];

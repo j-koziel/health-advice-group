@@ -10,13 +10,13 @@ module.exports = {
     extend: {
       keyframes: {
         fillAnimation: {
-          "0%": {fill: ""},
-          "100%": {fill: "white"}
-        }
+          "0%": { fill: "" },
+          "100%": { fill: "white" },
+        },
       },
       animation: {
-        fill: "fillAnimation 1s ease-in-out"
-      }
+        fill: "fillAnimation 1s ease-in-out",
+      },
     },
   },
   darkMode: "class",
@@ -55,5 +55,6 @@ module.exports = {
         },
       },
     }),
+    require("tailwind-scrollbar"),
   ],
 };

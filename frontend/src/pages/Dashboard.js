@@ -9,6 +9,7 @@ import { AirQualityDash } from "../components/AirQualityDash";
 import { WeatherDisplay } from "../components/WeatherDisplay";
 import { UserSettings } from "../components/UserSettings";
 import { HealthAdvice } from "../components/HealthAdvice";
+import { Carousel } from "../components/Carousel";
 import { getOpenWeatherMapData } from "../utils/get-data";
 import { config } from "../settings/config";
 import { useAuth } from "../context/AuthContext";
@@ -44,47 +45,61 @@ export function Dashboard() {
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
       );
 
-      setWeatherData([...weatherData, currWeatherData]);
-      setAirQualityData([...airQualityData, currAirQualityData.list[0]]);
+      setWeatherData((existingWeatherData) => [
+        ...existingWeatherData,
+        currWeatherData,
+      ]);
+      setAirQualityData((existingAirQualityData) => [
+        ...existingAirQualityData,
+        currAirQualityData,
+      ]);
     });
 
     const getData = async () => {
-      await me(accessToken, setUserData);
+      const user = await me(accessToken, setUserData);
+      const getWeatherAtPreferredLocations = async () => {
+        const preferredLocationsWeatherData =
+          user &&
+          (await Promise.all(
+            user.preferred_locations.map(
+              async (location) =>
+                await getOpenWeatherMapData(
+                  `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${config.weatherApiKey}&units=${preferredUnits}`
+                )
+            )
+          ));
+
+        setWeatherData((existingWeatherData) => [
+          ...existingWeatherData,
+          ...preferredLocationsWeatherData,
+        ]);
+        return;
+      };
+
+      const getAirQualityAtPreferredLocations = async () => {
+        const preferredLocationsAirQualityData =
+          user &&
+          (await Promise.all(
+            user.preferred_locations.map(
+              async (location) =>
+                await getOpenWeatherMapData(
+                  `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.lat}&lon=${location.lon}&appid=${config.airQualityApiKey}`
+                )
+            )
+          ));
+
+        setAirQualityData((existingAirQualityData) => [
+          ...existingAirQualityData,
+          ...preferredLocationsAirQualityData,
+        ]);
+        return;
+      };
+
+      getWeatherAtPreferredLocations();
+      getAirQualityAtPreferredLocations();
     };
 
-    const getWeatherAtPreferredLocations = async () => {
-      const preferredLocationsWeatherData =
-        userData &&
-        (await Promise.all(
-          userData.preferred_locations.map(
-            async (location) =>
-              await getOpenWeatherMapData(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${config.weatherApiKey}&units=${preferredUnits}`
-              )
-          )
-        ));
-
-      setWeatherData([...weatherData, ...preferredLocationsWeatherData]);
-      return;
-    };
-
-    const getAirQualityAtPreferredLocations = async () => {
-      const preferredLocationsAirQualityData =
-        userData &&
-        (await Promise.all(
-          userData.preferred_locations.map(
-            async (location) =>
-              await getOpenWeatherMapData(
-                `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location.lat}&lon=${location.lon}&appid=${config.airQualityApiKey}`
-              )
-          )
-        ));
-
-      console.log(preferredLocationsAirQualityData);
-    };
-
-    // getWeatherAtPreferredLocations();
-    getAirQualityAtPreferredLocations();
+    getData();
 
     setIsLoading(false);
   }, [preferredUnits]);
@@ -100,20 +115,29 @@ export function Dashboard() {
   }, [userData]);
 
   const dashboardItems = [
-    // weatherData && airQualityData && (
-    //   <div>
-    //     <WeatherDisplay
-    //       weatherData={weatherData}
-    //       units={preferredUnits}
-    //       displayStyle="compact"
-    //     />
-    //     <HealthAdvice temp={Math.round(weatherData.main.temp)} uvIndex={4} />
-    //     <AirQualityDash
-    //       airQualityData={airQualityData}
-    //       dashboardType="compact"
-    //     />
-    //   </div>
-    // ),
+    weatherData.length && airQualityData.length && userData && (
+      <Carousel
+        items={userData.preferred_locations.map((_, i) => {
+          return (
+            <div>
+              <WeatherDisplay
+                weatherData={weatherData[i]}
+                units={preferredUnits}
+                displayStyle="compact"
+              />
+              <HealthAdvice
+                temp={Math.round(weatherData[i].main.temp)}
+                uvIndex={4}
+              />
+              <AirQualityDash
+                airQualityData={airQualityData[i].list[0]}
+                dashboardType="compact"
+              />
+            </div>
+          );
+        })}
+      />
+    ),
     userData && <UserSettings userData={userData} />,
   ];
 

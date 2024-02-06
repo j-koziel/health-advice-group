@@ -15,12 +15,11 @@ export function Carousel(items) {
           className="flex gap-[48px] scroll-smooth overflow-auto snap-x snap-mandatory scrollbar-none"
           style={{ msOverflowStyle: "none" }}
         >
-          {items &&
-            items.map((item, i) => (
-              <div key={i} className="snap-center">
-                {item}
-              </div>
-            ))}
+          {items.map((item, i) => (
+            <div key={i} className="snap-center">
+              {item}
+            </div>
+          ))}
         </div>
         <button>
           <ChevronRight />

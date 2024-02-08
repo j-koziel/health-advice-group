@@ -20,9 +20,9 @@ export function HealthAdvice({ temp, uvIndex }) {
 
   return (
     <div className="flex flex-col items-center gap-y-4 md:items-start">
-      <h1 className="text-5xl font-bold">Our Advice:</h1>
+      <h1 className="text-xl md:text-5xl font-bold">Our Advice:</h1>
       {healthAdviceData && (
-        <ul className="flex flex-col items-center gap-y-12 text-4xl md:items-start">
+        <ul className="flex flex-col items-center gap-y-12 text-lg md:text-4xl md:items-start">
           <li>{healthAdviceData.uv_advice}</li>
           <li>{healthAdviceData.temp_advice}</li>
           <li>{healthAdviceData.health_risks[0]}</li>

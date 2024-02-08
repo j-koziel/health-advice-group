@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@nextui-org/react";
 import { motion } from "framer-motion";
@@ -23,6 +23,7 @@ export function Dashboard() {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const weatherCarouselRef = useRef();
 
   const { accessToken, me } = useAuth();
   const { preferredUnits } = useWeatherUnits();
@@ -119,7 +120,7 @@ export function Dashboard() {
       <Carousel
         items={userData.preferred_locations.map((_, i) => {
           return (
-            <div className="w-[500px] flex flex-col items-center justify-center">
+            <div className="w-fit md:w-[500px] flex flex-col items-center justify-center">
               <WeatherDisplay
                 weatherData={weatherData[i]}
                 units={preferredUnits}
@@ -132,7 +133,7 @@ export function Dashboard() {
             </div>
           );
         })}
-        width={600}
+        width={500}
       />
     ),
     airQualityData.length && (

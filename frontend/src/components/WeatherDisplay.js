@@ -26,32 +26,32 @@ export function WeatherDisplay({
   displayStyle,
   forecastData = null,
 }) {
-  const [isFavourited, setIsFavourited] = useState(false)
-  
+  const [isFavourited, setIsFavourited] = useState(false);
+
   const { accessToken } = useAuth();
-  const {favLocations, setFavLocations} = useFavLocations()
+  const { favLocations, setFavLocations } = useFavLocations();
 
   useEffect(() => {
     async function checkIfLocationIsFavourited() {
       try {
-        const res = await axios.get(`http://localhost:8000/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`, {headers: {Authorization: `Bearer ${accessToken}`}})
+        const res = await axios.get(
+          `http://localhost:8000/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
+          { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
 
         if (res.data.is_favourited) {
-          setIsFavourited(true)
-          return
+          setIsFavourited(true);
+          return;
         }
 
-        return
+        return;
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
     }
 
-    checkIfLocationIsFavourited()
-  }, [])
-  
-  
-
+    checkIfLocationIsFavourited();
+  }, []);
 
   if (displayStyle === "compact")
     return (
@@ -78,7 +78,7 @@ export function WeatherDisplay({
                   {formatTempUnits(units)}
                 </h3>
                 <h3 className="text-3xl">
-                  Feels like {Math.round(weatherData.main.feels_like)}{" "}
+                  Feels like {Math.round(weatherData.main.feels_like)}
                   {formatTempUnits(units)}
                 </h3>
               </div>
@@ -135,9 +135,12 @@ export function WeatherDisplay({
             onClick={async (e) => {
               try {
                 if (isFavourited) {
-                  const delLocationRes = await axios.delete(`http://localhost:8000/api/v1/users/favourite-locations?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`, {headers: {Authorization: `Bearer ${accessToken}`}})  
-                  setIsFavourited(false)
-                  return
+                  const delLocationRes = await axios.delete(
+                    `http://localhost:8000/api/v1/users/favourite-locations?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
+                    { headers: { Authorization: `Bearer ${accessToken}` } }
+                  );
+                  setIsFavourited(false);
+                  return;
                 }
 
                 const res = await axios.put(
@@ -145,18 +148,26 @@ export function WeatherDisplay({
                   { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
                   { headers: { Authorization: `Bearer ${accessToken}` } }
                 );
-                
-  
-                setFavLocations([...favLocations, {lat: weatherData.coord.lat, lon: weatherData.coord.lon}])
-                localStorage.setItem("favLocations", JSON.stringify([...favLocations, {lat: weatherData.coord.lat, lon: weatherData.coord.lon}]))
-                setIsFavourited(true)
-                return
+
+                setFavLocations([
+                  ...favLocations,
+                  { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
+                ]);
+                localStorage.setItem(
+                  "favLocations",
+                  JSON.stringify([
+                    ...favLocations,
+                    { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
+                  ])
+                );
+                setIsFavourited(true);
+                return;
               } catch (err) {
-                console.error(err)
+                console.error(err);
               }
             }}
           >
-            <Star className="hover:animate-fill"/>
+            <Star className="hover:animate-fill" />
           </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}

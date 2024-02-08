@@ -9,14 +9,14 @@ export function Carousel({ items, width }) {
       <div className="flex justify-between items-center gap-[10px] pl-0 pr-0">
         <button
           onClick={() => {
-            listRef.current.scrollLeft -= 500 + 10;
+            listRef.current.scrollLeft -= width + 5;
           }}
         >
           <ChevronLeft />
         </button>
         <div
           ref={listRef}
-          className="flex gap-[250px] px-[10px] scroll-smooth overflow-auto snap-x snap-mandatory scrollbar-none transition-all"
+          className="flex gap-[200px] px-[5px] scroll-smooth overflow-auto snap-x snap-mandatory scrollbar-none transition-all"
           style={{ msOverflowStyle: "none", width }}
         >
           {items.map((item, i) => (
@@ -27,7 +27,7 @@ export function Carousel({ items, width }) {
         </div>
         <button
           onClick={() => {
-            listRef.current.scrollLeft += 500 + 10;
+            listRef.current.scrollLeft += width + 5;
           }}
         >
           <ChevronRight />

@@ -120,7 +120,7 @@ export function Dashboard() {
       <Carousel
         items={userData.preferred_locations.map((_, i) => {
           return (
-            <div className="w-fit md:w-[500px] flex flex-col items-center justify-center">
+            <div className="w-fit md:w-[500px] flex flex-col">
               <WeatherDisplay
                 weatherData={weatherData[i]}
                 units={preferredUnits}
@@ -161,7 +161,7 @@ export function Dashboard() {
     );
 
   return (
-    <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:flex-wrap lg:h-screen">
+    <div className="bg-background w-full flex flex-col text-foreground sm:flex-col md:flex-col lg:flex-row lg:flex-wrap ">
       {dashboardItems.map((dashItem, i) => {
         return (
           <motion.div

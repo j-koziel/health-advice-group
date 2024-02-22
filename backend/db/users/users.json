@@ -66,5 +66,12 @@
         "email": "blahblah@gmail.com",
         "preferred_locations": [],
         "hashed_password": "$2b$12$vLIfHVYev2P1Al5a3lkw.Oc2f2gYX12mVp5Irm9n6LCVTq2UdFGUy"
+    },
+    {
+        "id": "7490b1c1-ebf9-4fc2-961f-bf5b41ac9998",
+        "name": "dillan",
+        "email": "difjfsdufgsdf@fdougdfg.com",
+        "preferred_locations": [],
+        "hashed_password": "$2b$12$5akVjkoCOMJYEM9zbCpSkuCL68xOBJANkOVBDA0UBIOmGreBwOy8C"
     }
 ]

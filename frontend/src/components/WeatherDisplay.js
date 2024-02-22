@@ -77,7 +77,7 @@ export function WeatherDisplay({
                   {Math.round(weatherData.main.temp)}
                   {formatTempUnits(units)}
                 </h3>
-                <h3 className="text-3xl">
+                <h3 className="text-2xl">
                   Feels like {Math.round(weatherData.main.feels_like)}
                   {formatTempUnits(units)}
                 </h3>
@@ -167,7 +167,7 @@ export function WeatherDisplay({
               }
             }}
           >
-            <Star className="hover:animate-fill" />
+            <Star className="hover:animate-fill" style={{fill: isFavourited ? "white" }} />
           </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}

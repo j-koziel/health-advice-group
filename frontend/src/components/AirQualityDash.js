@@ -40,7 +40,7 @@ export function AirQualityDash({
 
     return (
       <p className="text-2xl mt-2">
-        The air quality in {location} is{" "}
+        The air quality {location.length ? `in ${location}` : "here"} is{" "}
         <span className="underline">
           {airQualityDescription(airQualityData.main.aqi)}
         </span>

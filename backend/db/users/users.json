@@ -42,6 +42,10 @@
             {
                 "lat": 51.5085,
                 "lon": -0.1257
+            },
+            {
+                "lat": 51.5074,
+                "lon": -0.1278
             }
         ],
         "hashed_password": "$2b$12$lB6ogoP2.aXgwDugMBlAoOA.j91nJilTxDI6OrMhdO3Ib/Rxp25pW"

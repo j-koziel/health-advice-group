@@ -167,7 +167,10 @@ export function WeatherDisplay({
               }
             }}
           >
-            <Star className="hover:animate-fill" style={{fill: isFavourited ? "white" }} />
+            <Star
+              className="hover:animate-fill"
+              style={{ fill: isFavourited ?? "white" }}
+            />
           </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}

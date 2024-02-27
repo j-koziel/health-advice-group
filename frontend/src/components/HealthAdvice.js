@@ -25,7 +25,9 @@ export function HealthAdvice({ temp, uvIndex }) {
         <ul className="flex flex-col items-center gap-y-12 text-lg md:text-4xl md:items-start">
           <li>{healthAdviceData.uv_advice}</li>
           <li>{healthAdviceData.temp_advice}</li>
-          <li>{healthAdviceData.health_risks[0]}</li>
+          <li>
+            There is a heightened risk of {healthAdviceData.health_risks[0]}
+          </li>
         </ul>
       )}
     </div>

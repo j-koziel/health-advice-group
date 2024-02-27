@@ -37,6 +37,7 @@ export function WeatherAndAirQuality() {
         <AirQualityDash
           dashboardType="full"
           airQualityData={airQualityData.list[0]}
+          location=""
         />
       ) : null}
     </div>

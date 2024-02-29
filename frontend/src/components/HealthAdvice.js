@@ -26,7 +26,9 @@ export function HealthAdvice({ temp, uvIndex }) {
           <li>{healthAdviceData.uv_advice}</li>
           <li>{healthAdviceData.temp_advice}</li>
           <li>
-            There is a heightened risk of {healthAdviceData.health_risks[0]}
+            {healthAdviceData.health_risks.length > 1
+              ? `There is a heightened risk of ${healthAdviceData.health_risks[0]}`
+              : healthAdviceData.health_risks[0]}
           </li>
         </ul>
       )}

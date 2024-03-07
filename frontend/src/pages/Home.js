@@ -22,12 +22,14 @@ export function Home() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
 
-      const currWeatherData = await getOpenWeatherMapData(
+      const { _, currWeatherData } = await getOpenWeatherMapData(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${preferredUnits}`
       );
-      const currAirQualityData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
-      );
+      const currAirQualityData = (
+        await getOpenWeatherMapData(
+          `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
+        )
+      ).data;
       const currentLocationRes = await axios.get(
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
       );

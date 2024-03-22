@@ -24,8 +24,17 @@ export function Header() {
               <CircleUser />
             </NavLink>
           ) : (
-            <div>
-              <NavLink path="/sign-in" className="">
+            <div className="flex gap-x-2">
+              <NavLink
+                path="/sign-up"
+                className="text-foreground font-bold p-2 rounded-md border border-secondary transition-all hover:bg-primary"
+              >
+                Sign up
+              </NavLink>
+              <NavLink
+                path="/sign-in"
+                className="bg-primary font-bold text-altForeground p-2 rounded-md border border-secondary transition-all hover:bg-secondary"
+              >
                 Sign in
               </NavLink>
             </div>

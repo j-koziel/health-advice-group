@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 
 import { getOpenWeatherMapData } from "../utils/get-data";
-import { useWeatherUnits } from "../context/UnitsContext";
+import { useWeatherUnits } from "../contexts/UnitsContext";
 import { config } from "../settings/config";
 
 export function LocationSearch({

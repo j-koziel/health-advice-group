@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useWeatherUnits } from "../context/UnitsContext";
+import { useWeatherUnits } from "../contexts/UnitsContext";
 import { getHealthAdviceData } from "../utils/get-data";
 
 export function HealthAdvice({ temp, uvIndex }) {

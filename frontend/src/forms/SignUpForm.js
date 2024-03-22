@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 
 import { Input } from "../components/Input";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 import { config } from "../settings/config";
 import { toast, ToastContainer } from "react-toastify";
 

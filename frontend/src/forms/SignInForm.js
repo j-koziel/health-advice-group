@@ -5,9 +5,9 @@ import axios from "axios";
 
 import { Input } from "../components/Input";
 import { config } from "../settings/config";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
-export function SignInForm({setAuthError}) {
+export function SignInForm({ setAuthError }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAccessToken } = useAuth();
@@ -24,30 +24,29 @@ export function SignInForm({setAuthError}) {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
-            setAuthError(null)
-          const res = await axios.post(
-            `${config.backendUrl}/api/v1/users/token`,
-            {
-              username: email,
-              password: password,
-            },
-            {
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+            setAuthError(null);
+            const res = await axios.post(
+              `${config.backendUrl}/api/v1/users/token`,
+              {
+                username: email,
+                password: password,
               },
-            }
-          );
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+              }
+            );
 
-          localStorage.setItem("accessToken", res.data.access_token);
-          setAccessToken(res.data.access_token);
+            localStorage.setItem("accessToken", res.data.access_token);
+            setAccessToken(res.data.access_token);
 
-          navigate("/dashboard");
-          return
+            navigate("/dashboard");
+            return;
           } catch (err) {
-            console.log(err.response.data.detail)
-            setAuthError(err.response.data.detail)
+            console.log(err.response.data.detail);
+            setAuthError(err.response.data.detail);
           }
-          
         }}
         className="h-1/2 w-full flex flex-col justify-evenly items-center"
       >

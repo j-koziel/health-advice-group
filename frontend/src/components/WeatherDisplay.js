@@ -9,16 +9,16 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
 import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
+import { useAuth } from "../contexts/AuthContext";
+import { useFavLocations } from "../contexts/FavLocationsContext";
 import { config } from "../settings/config";
-import { useAuth } from "../context/AuthContext";
-import { useFavLocations } from "../context/FavLocationsContext";
-import { useEffect, useState } from "react";
 
 export function WeatherDisplay({
   weatherData,
@@ -35,7 +35,7 @@ export function WeatherDisplay({
     async function checkIfLocationIsFavourited() {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
+          `${config.backendUrl}/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
           { headers: { Authorization: `Bearer ${accessToken}` } }
         );
 

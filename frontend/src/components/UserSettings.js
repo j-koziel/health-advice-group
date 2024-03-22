@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { Checkbox } from "@nextui-org/react";
-import { toast, ToastContainer } from "react-toastify";
-import axios from "axios";
 
 import { Input } from "./Input";
-import { useWeatherUnits } from "../context/UnitsContext";
-import { config } from "../settings/config";
-import { useAuth } from "../context/AuthContext";
+import { useWeatherUnits } from "../contexts/UnitsContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export function UserSettings({ userData }) {
   const { preferredUnits, setPreferredUnits } = useWeatherUnits();
@@ -20,7 +17,7 @@ export function UserSettings({ userData }) {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-  const { accessToken, updatePassword } = useAuth();
+  const { accessToken, updatePassword, logout } = useAuth();
 
   const handleUnitChange = (
     isSelected,
@@ -126,6 +123,7 @@ export function UserSettings({ userData }) {
               Imperial
             </Checkbox>
           </div>
+          <div onClick={() => logout()}>Log out</div>
         </div>
       </div>
     </div>

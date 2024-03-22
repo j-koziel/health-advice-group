@@ -8,7 +8,7 @@ import { AirQualityDash } from "../components/AirQualityDash";
 import { config } from "../settings/config";
 import { getOpenWeatherMapData } from "../utils/get-data";
 import { Accordion } from "../components/Accordion";
-import { useWeatherUnits } from "../context/UnitsContext";
+import { useWeatherUnits } from "../contexts/UnitsContext";
 
 export function Home() {
   const [weatherData, setWeatherData] = useState(null);
@@ -22,19 +22,20 @@ export function Home() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
 
-      const { _, currWeatherData } = await getOpenWeatherMapData(
+      const weatherData = await getOpenWeatherMapData(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${preferredUnits}`
       );
-      const currAirQualityData = (
-        await getOpenWeatherMapData(
-          `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
-        )
-      ).data;
+      const currAirQualityData = await getOpenWeatherMapData(
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
+      );
       const currentLocationRes = await axios.get(
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
       );
 
-      setWeatherData(currWeatherData);
+      console.log(weatherData);
+      console.log(currAirQualityData);
+
+      setWeatherData(weatherData);
       setAirQualityData(currAirQualityData.list[0]);
       setCurrentLocation(currentLocationRes.data[0]);
       setIsLoading(false);
@@ -62,44 +63,46 @@ export function Home() {
   if (isLoading)
     return (
       <div className="h-full w-full">
-        <CircularProgress aria-label="Loading..." />;
+        <CircularProgress aria-label="Loading..." />
       </div>
     );
 
   return (
     <div className="flex flex-col h-full w-full bg-background items-center text-foreground pb-96">
-      <Tabs
-        color="primary"
-        className="mt-8"
-        classNames={{
-          tabList: "bg-altBackground",
-          cursor: "w-full bg-altForeground",
-          tabContent:
-            "text-altForeground group-data-[selected=true]:text-foreground",
-        }}
-      >
-        <Tab key="weather" title="Weather">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-            className="h-[500px]"
-          >
-            <WeatherDisplay
-              weatherData={weatherData}
-              units={preferredUnits}
-              location={currentLocation}
-            />
-          </motion.div>
-        </Tab>
-        <Tab key="air-quality" title="Air Quality">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-          >
-            <AirQualityDash airQualityData={airQualityData} />
-          </motion.div>
-        </Tab>
-      </Tabs>
+      {weatherData && airQualityData && (
+        <Tabs
+          color="primary"
+          className="mt-8"
+          classNames={{
+            tabList: "bg-altBackground",
+            cursor: "w-full bg-altForeground",
+            tabContent:
+              "text-altForeground group-data-[selected=true]:text-foreground",
+          }}
+        >
+          <Tab key="weather" title="Weather">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+              className="h-[500px]"
+            >
+              <WeatherDisplay
+                weatherData={weatherData}
+                units={preferredUnits}
+                location={currentLocation}
+              />
+            </motion.div>
+          </Tab>
+          <Tab key="air-quality" title="Air Quality">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { ease: "easeIn" } }}
+            >
+              <AirQualityDash airQualityData={airQualityData} />
+            </motion.div>
+          </Tab>
+        </Tabs>
+      )}
 
       <div className="h-full w-full px-12 mt-52 md:mt-0">
         <h1 className="text-9xl py-44 font-bold">FAQs</h1>

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { config } from "../settings/config";
@@ -11,8 +12,12 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
+  const navigate = useNavigate();
 
   function logout() {
+    localStorage.removeItem("accessToken");
+    setAccessToken("");
+    navigate("/");
     return;
   }
 

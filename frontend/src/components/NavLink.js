@@ -1,7 +1,7 @@
-export function NavLink({ path, label, className }) {
+export function NavLink({ path, className, children }) {
   return (
-    <a className={className} href={path} aria-label={label}>
-      {label}
+    <a className={className} href={path}>
+      {children}
     </a>
   );
 }

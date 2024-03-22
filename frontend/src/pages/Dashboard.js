@@ -12,8 +12,8 @@ import { HealthAdvice } from "../components/HealthAdvice";
 import { Carousel } from "../components/Carousel";
 import { getOpenWeatherMapData } from "../utils/get-data";
 import { config } from "../settings/config";
-import { useAuth } from "../context/AuthContext";
-import { useWeatherUnits } from "../context/UnitsContext";
+import { useAuth } from "../contexts/AuthContext";
+import { useWeatherUnits } from "../contexts/UnitsContext";
 
 import "react-toastify/dist/ReactToastify.css";
 

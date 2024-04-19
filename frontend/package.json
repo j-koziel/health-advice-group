@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nextui-org/popover": "^2.1.20",
     "@nextui-org/react": "^2.2.9",
+    "@nextui-org/tooltip": "^2.0.33",
     "@react-spring/parallax": "^9.7.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

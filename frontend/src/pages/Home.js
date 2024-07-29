@@ -32,9 +32,6 @@ export function Home() {
         `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
       );
 
-      console.log(weatherData);
-      console.log(currAirQualityData);
-
       setWeatherData(weatherData);
       setAirQualityData(currAirQualityData.list[0]);
       setCurrentLocation(currentLocationRes.data[0]);

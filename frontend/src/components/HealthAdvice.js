@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { useWeatherUnits } from "../contexts/UnitsContext";
 import { getHealthAdviceData } from "../utils/get-data";
 
-export function HealthAdvice({ temp, uvIndex }) {
+export function HealthAdvice({ weatherData }) {
   const [healthAdviceData, setHealthAdviceData] = useState(null);
-
-  const { preferredUnits } = useWeatherUnits();
 
   useEffect(() => {
     const getAndSetHealthAdviceData = async () => {
       setHealthAdviceData({
-        ...(await getHealthAdviceData(temp, uvIndex, preferredUnits)),
+        ...(await getHealthAdviceData(weatherData)),
       });
     };
 

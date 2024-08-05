@@ -63,7 +63,7 @@ export function Home() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-              className="min-h-[500px] flex flex-col items-center lg:flex-row"
+              className="min-h-[500px] w-full flex flex-col items-center lg:flex-row"
             >
               <WeatherDisplay
                 weatherData={weatherData}

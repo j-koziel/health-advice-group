@@ -5,6 +5,7 @@ import axios from "axios";
 
 import { WeatherDisplay } from "../components/WeatherDisplay";
 import { AirQualityDash } from "../components/AirQualityDash";
+import { HealthAdvice } from "../components/HealthAdvice";
 import { config } from "../settings/config";
 import { getOpenWeatherMapData } from "../utils/get-data";
 import { useWeatherUnits } from "../contexts/UnitsContext";
@@ -40,13 +41,13 @@ export function Home() {
 
   if (isLoading)
     return (
-      <div className="h-full w-full">
+      <div className="h-full w-full flex flex-col items-center justify-center">
         <CircularProgress aria-label="Loading..." />
       </div>
     );
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-background items-center text-foreground">
+    <div className="flex flex-col items-center w-full bg-background text-foreground">
       {weatherData && airQualityData && (
         <Tabs
           color="primary"
@@ -62,13 +63,14 @@ export function Home() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-              className="h-[500px]"
+              className="min-h-[500px] flex flex-col items-center lg:flex-row"
             >
               <WeatherDisplay
                 weatherData={weatherData}
                 units={preferredUnits}
                 location={currentLocation}
               />
+              <HealthAdvice weatherData={weatherData} />
             </motion.div>
           </Tab>
           <Tab key="air-quality" title="Air Quality">

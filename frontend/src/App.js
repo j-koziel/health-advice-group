@@ -10,7 +10,11 @@ function App() {
   const darkMode = useDarkMode(false);
 
   return (
-    <div className={`${darkMode.value ? "dark" : ""}`}>
+    <div
+      className={`${
+        darkMode.value ? "dark bg-background text-foreground" : ""
+      }`}
+    >
       <Header />
 
       <Routes>

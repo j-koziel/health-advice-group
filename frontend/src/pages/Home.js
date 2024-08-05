@@ -39,24 +39,6 @@ export function Home() {
     });
   }, [preferredUnits]);
 
-  const accordionData = [
-    {
-      title: "Where do you get your data from?",
-      content:
-        "Obviously we want to be as accurate as possible when it comes to the data that we display on this site. To do this we are using an industry standard data source which is also used by established brands such as Microsoft, Amazon and Google",
-    },
-    {
-      title: "Where do you get the health advice from?",
-      content:
-        "We have an in-house formula which automatically selects the best advice based on the current weather conditions",
-    },
-    {
-      title: "Why do I need this?",
-      content:
-        "In my opinion this tool is essential if you want to ensure your health even in the most extreme of weather conditions.",
-    },
-  ];
-
   if (isLoading)
     return (
       <div className="h-full w-full">
@@ -65,7 +47,7 @@ export function Home() {
     );
 
   return (
-    <div className="flex flex-col h-full w-full bg-background items-center text-foreground pb-96">
+    <div className="flex flex-col h-full w-full bg-background items-center text-foreground">
       {weatherData && airQualityData && (
         <Tabs
           color="primary"
@@ -100,11 +82,6 @@ export function Home() {
           </Tab>
         </Tabs>
       )}
-
-      <div className="h-full w-full px-12 mt-52 md:mt-0">
-        <h1 className="text-9xl py-44 font-bold">FAQs</h1>
-        <Accordion accordionData={accordionData} />
-      </div>
     </div>
   );
 }

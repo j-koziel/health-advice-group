@@ -12,7 +12,7 @@ export function Header() {
           className="bg-transparent border-none text-lg font-bold cursor-pointer transition-all hover:drop-shadow-lg md:text-2xl"
           onClick={() => navigate("/")}
         >
-          Health Advice Group
+          Health Advice™
         </h1>
         <div className="flex items-center gap-x-2">
           <ThemeSwitcher />

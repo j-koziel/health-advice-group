@@ -105,9 +105,6 @@ export function WeatherDisplay({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-xl">
-                  <Sun height={36} width={36} /> UV Index. {weatherData.uvi}
-                </div>
-                <div className="flex items-center gap-2 text-xl">
                   <Droplet height={36} width={36} /> {weatherData.main.humidity}
                   % humidity
                 </div>
@@ -222,9 +219,6 @@ export function WeatherDisplay({
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-xl">
-                  <Sun height={36} width={36} /> UV Index. {weatherData.uvi}
-                </div>
-                <div className="flex items-center gap-2 text-xl">
                   <Droplet height={36} width={36} /> {weatherData.main.humidity}
                   % humidity
                 </div>
@@ -307,9 +301,6 @@ export function WeatherDisplay({
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-2 text-xl">
-                    <Sun height={36} width={36} /> UV Index. {weatherData.uvi}
-                  </div>
-                  <div className="flex items-center gap-2 text-xl">
                     <Droplet height={36} width={36} />{" "}
                     {weatherData.main.humidity}% humidity
                   </div>
@@ -323,12 +314,7 @@ export function WeatherDisplay({
             </div>
           </div>
         </div>
-        <HealthAdvice
-          temp={Math.round(weatherData.main.temp)}
-          uvIndex={
-            4 /* This is a placeholder value since the API i am using charges for uv information */
-          }
-        />
+        <HealthAdvice weatherData={weatherData} />
       </div>
     );
   }

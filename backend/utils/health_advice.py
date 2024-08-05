@@ -26,8 +26,6 @@ def create_health_advice(weather_data: dict) -> HealthAdviceRes:
     presence_penalty=0
   )
 
-  print(response.choices[0].message.content)
-
   formatted_response = response.choices[0].message.content.replace("\n", "")
 
   first_health_advice_tip = formatted_response.split("1.")[1].split("2.")[0].strip()

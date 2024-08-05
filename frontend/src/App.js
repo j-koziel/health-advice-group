@@ -1,6 +1,5 @@
 import "./App.css";
 import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import useDarkMode from "use-dark-mode";
 import { Routes, Route } from "react-router-dom";
@@ -31,8 +30,6 @@ function App() {
         <Route path="/articles/:title" element={<Article />} />
         <Route path="/tncs" element={<TermsAndConditions />} />
       </Routes>
-
-      <Footer />
     </div>
   );
 }

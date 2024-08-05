@@ -1,24 +1,11 @@
-import {
-  Wind,
-  Sunrise,
-  Sunset,
-  MoveUp,
-  Droplet,
-  Sun,
-  Star,
-} from "lucide-react";
+import { Wind, Sunrise, Sunset, MoveUp, Droplet } from "lucide-react";
 import { motion } from "framer-motion";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
 import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
-import { useAuth } from "../contexts/AuthContext";
-import { useFavLocations } from "../contexts/FavLocationsContext";
-import { config } from "../settings/config";
 
 export function WeatherDisplay({
   weatherData,
@@ -26,33 +13,6 @@ export function WeatherDisplay({
   displayStyle,
   forecastData = null,
 }) {
-  const [isFavourited, setIsFavourited] = useState(false);
-
-  const { accessToken } = useAuth();
-  const { favLocations, setFavLocations } = useFavLocations();
-
-  useEffect(() => {
-    async function checkIfLocationIsFavourited() {
-      try {
-        const res = await axios.get(
-          `${config.backendUrl}/api/v1/users/favourite-locations/is-favourited?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
-          { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-
-        if (res.data.is_favourited) {
-          setIsFavourited(true);
-          return;
-        }
-
-        return;
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    checkIfLocationIsFavourited();
-  }, []);
-
   if (displayStyle === "compact")
     return (
       <div className="w-full flex flex-col items-center md:flex-row justify-center text-foreground">
@@ -127,48 +87,6 @@ export function WeatherDisplay({
           animate={{ opacity: 1, transition: { ease: "easeIn", delay: 1.2 } }}
           className="flex items-center justify-center mb-10 relative"
         >
-          <button
-            className="absolute -top-6 right-12"
-            onClick={async (e) => {
-              try {
-                if (isFavourited) {
-                  const delLocationRes = await axios.delete(
-                    `http://localhost:8000/api/v1/users/favourite-locations?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}`,
-                    { headers: { Authorization: `Bearer ${accessToken}` } }
-                  );
-                  setIsFavourited(false);
-                  return;
-                }
-
-                const res = await axios.put(
-                  `http://localhost:8000/api/v1/users/favourite-locations`,
-                  { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
-                  { headers: { Authorization: `Bearer ${accessToken}` } }
-                );
-
-                setFavLocations([
-                  ...favLocations,
-                  { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
-                ]);
-                localStorage.setItem(
-                  "favLocations",
-                  JSON.stringify([
-                    ...favLocations,
-                    { lat: weatherData.coord.lat, lon: weatherData.coord.lon },
-                  ])
-                );
-                setIsFavourited(true);
-                return;
-              } catch (err) {
-                console.error(err);
-              }
-            }}
-          >
-            <Star
-              className="hover:animate-fill"
-              style={{ fill: isFavourited ?? "white" }}
-            />
-          </button>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
             alt="weather"

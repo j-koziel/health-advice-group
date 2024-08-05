@@ -27,25 +27,3 @@ export async function getHealthAdviceData(weatherData) {
     console.error(err);
   }
 }
-
-export async function getArticles() {
-  try {
-    const res = await axios.get(`${config.backendUrl}/api/v1/articles`);
-
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-export async function getArticle(articleTitle) {
-  try {
-    const res = await axios.get(
-      `${config.backendUrl}/api/v1/articles/${articleTitle}`
-    );
-
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
-}

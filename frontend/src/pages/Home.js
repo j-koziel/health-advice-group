@@ -7,7 +7,6 @@ import { WeatherDisplay } from "../components/WeatherDisplay";
 import { AirQualityDash } from "../components/AirQualityDash";
 import { config } from "../settings/config";
 import { getOpenWeatherMapData } from "../utils/get-data";
-import { Accordion } from "../components/Accordion";
 import { useWeatherUnits } from "../contexts/UnitsContext";
 
 export function Home() {
@@ -47,7 +46,7 @@ export function Home() {
     );
 
   return (
-    <div className="flex flex-col h-full w-full bg-background items-center text-foreground">
+    <div className="flex flex-col w-full bg-background items-center text-foreground">
       {weatherData && airQualityData && (
         <Tabs
           color="primary"

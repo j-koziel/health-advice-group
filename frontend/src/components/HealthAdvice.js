@@ -12,7 +12,7 @@ export function HealthAdvice({ weatherData }) {
     };
 
     getAndSetHealthAdviceData();
-  }, []);
+  }, [weatherData]);
 
   const extractAdviceHeading = (adviceString) => {
     const firstOccurrenceIndex = adviceString.indexOf("**");

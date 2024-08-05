@@ -46,7 +46,7 @@ export function Home() {
     );
 
   return (
-    <div className="flex flex-col w-full bg-background items-center text-foreground">
+    <div className="flex flex-col w-full min-h-screen bg-background items-center text-foreground">
       {weatherData && airQualityData && (
         <Tabs
           color="primary"

@@ -15,7 +15,7 @@ export function WeatherDisplay({
 }) {
   if (displayStyle === "compact")
     return (
-      <div className="w-full flex flex-col items-center md:flex-row justify-center text-foreground">
+      <div className="w-full h-full flex flex-col items-center md:flex-row justify-center text-foreground">
         <div className="flex flex-col md:flex-row items-center">
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}

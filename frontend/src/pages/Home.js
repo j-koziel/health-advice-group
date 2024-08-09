@@ -41,13 +41,13 @@ export function Home() {
 
   if (isLoading)
     return (
-      <div className="h-full w-full flex flex-col items-center justify-center">
+      <div className="min-h-screen w-full flex flex-col items-center justify-center">
         <CircularProgress aria-label="Loading..." />
       </div>
     );
 
   return (
-    <div className="flex flex-col items-center w-full bg-background text-foreground">
+    <div className="min-h-screen flex flex-col items-center w-full bg-background text-foreground">
       {weatherData && airQualityData && (
         <Tabs
           color="primary"
@@ -63,7 +63,7 @@ export function Home() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { ease: "easeIn" } }}
-              className="min-h-[500px] w-full flex flex-col items-center lg:flex-row"
+              className="min-h-screen w-full flex flex-col lg:flex-row"
             >
               <WeatherDisplay
                 weatherData={weatherData}

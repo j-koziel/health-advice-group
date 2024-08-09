@@ -37,10 +37,10 @@ export function HealthAdvice({ weatherData }) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-4 w-1/2">
+    <div className="flex flex-col gap-y-4 md:w-1/2 p-10">
       <h1 className="text-xl md:text-5xl font-bold">Our Advice:</h1>
       {healthAdviceData ? (
-        <ul className="flex flex-col items-center gap-y-12 text-lg">
+        <ul className="flex flex-col gap-y-12 text-lg">
           {healthAdviceData.map((adviceString, i) => (
             <li key={i}>
               <strong>{extractAdviceHeading(adviceString)}:</strong>

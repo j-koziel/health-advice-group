@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { windDirection } from "../utils/wind-direction";
 import { formatTime } from "../utils/format-time";
 import { formatTempUnits, formatDistanceUnits } from "../utils/units";
-import { HealthAdvice } from "./HealthAdvice";
 import { WeatherForecastItem } from "./WeatherForecastItem";
 
 export function WeatherDisplay({
@@ -166,7 +165,7 @@ export function WeatherDisplay({
     );
   } else {
     return (
-      <div className="w-full flex flex-col gap-y-8 items-center md:flex-row md:justify-around md:items-center md:gap-x-12">
+      <div className="flex flex-col gap-y-8 items-center p-24 md:p-24 md:gap-x-12 md:w-1/2">
         <div className="flex flex-col items-center md:flex-row justify-center text-foreground">
           <div className="flex flex-col md:flex-row items-center">
             <img

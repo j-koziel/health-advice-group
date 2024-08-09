@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
-import { Spinner } from "@nextui-org/spinner";
+import { useState } from "react";
+import { Button, Spinner } from "@nextui-org/react";
 
 import { getHealthAdviceData } from "../utils/get-data";
 
 export function HealthAdvice({ weatherData }) {
   const [healthAdviceData, setHealthAdviceData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const getAndSetHealthAdviceData = async () => {
-      setHealthAdviceData(await getHealthAdviceData(weatherData));
-    };
-
-    getAndSetHealthAdviceData();
-  }, [weatherData]);
+  const getAndSetHealthAdviceData = async () => {
+    setHealthAdviceData(await getHealthAdviceData(weatherData));
+    setIsLoading(false);
+  };
 
   const extractAdviceHeading = (adviceString) => {
     const firstOccurrenceIndex = adviceString.indexOf("**");
@@ -39,7 +37,21 @@ export function HealthAdvice({ weatherData }) {
   return (
     <div className="flex flex-col gap-y-4 md:w-1/2 p-10">
       <h1 className="text-xl md:text-5xl font-bold">Our Advice:</h1>
-      {healthAdviceData ? (
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Button
+          onPress={async () => {
+            setIsLoading(true);
+            setHealthAdviceData(null);
+            await getAndSetHealthAdviceData();
+          }}
+          color="primary"
+        >
+          Generate ✨
+        </Button>
+      )}
+      {healthAdviceData && (
         <ul className="flex flex-col gap-y-12 text-lg">
           {healthAdviceData.map((adviceString, i) => (
             <li key={i}>
@@ -48,8 +60,6 @@ export function HealthAdvice({ weatherData }) {
             </li>
           ))}
         </ul>
-      ) : (
-        <Spinner />
       )}
       <p>
         <strong className="text-danger">DISCLAIMER:</strong> This advice is

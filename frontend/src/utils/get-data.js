@@ -5,7 +5,6 @@ import { config } from "../settings/config";
 export async function getOpenWeatherMapData(url) {
   try {
     const res = await axios.get(url);
-    console.log(res.data);
 
     return res.data;
   } catch (err) {
@@ -19,8 +18,6 @@ export async function getHealthAdviceData(weatherData) {
       `${config.backendUrl}/api/v1/health-advice`,
       weatherData
     );
-
-    console.log(res.data.advice);
 
     return res.data.advice;
   } catch (err) {

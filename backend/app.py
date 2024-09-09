@@ -7,6 +7,7 @@ from slowapi.middleware import SlowAPIMiddleware
 
 from api.health_advice.views import health_advice_router
 from api.weather.views import weather_router
+from api.air_quality.views import air_quality_router
 
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
@@ -37,3 +38,4 @@ async def root():
 
 app.include_router(health_advice_router)
 app.include_router(weather_router)
+app.include_router(air_quality_router)

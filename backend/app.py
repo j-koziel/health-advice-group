@@ -5,7 +5,8 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
-from routes import health_advice
+from api.health_advice.views import health_advice_router
+from api.weather.views import weather_router
 
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
@@ -34,4 +35,5 @@ app.add_middleware(
 async def root():
   return {"msg": "all systems operational 🥳"}
 
-app.include_router(health_advice.router)
+app.include_router(health_advice_router)
+app.include_router(weather_router)

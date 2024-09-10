@@ -6,7 +6,7 @@ export async function getOpenWeatherMapData(url) {
   try {
     const res = await axios.get(url);
 
-    return res.data;
+    return res.data.weather_data || res.data.air_quality_data;
   } catch (err) {
     console.error(err);
   }

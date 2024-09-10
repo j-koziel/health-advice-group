@@ -23,13 +23,13 @@ export function Home() {
       const { latitude, longitude } = position.coords;
 
       const weatherData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.weatherApiKey}&units=${preferredUnits}`
+        `${config.weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=${preferredUnits}`
       );
       const currAirQualityData = await getOpenWeatherMapData(
-        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=${config.airQualityApiKey}`
+        `${config.airQualityApiUrl}?lat=${latitude}&lon=${longitude}`
       );
       const currentLocationRes = await axios.get(
-        `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=0&appid=${config.airQualityApiKey}`
+        `${config.reverseGeoLocationApiUrl}?lat=${latitude}&lon=${longitude}&limit=0`
       );
 
       setWeatherData(weatherData);

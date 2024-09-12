@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
-class ReverseGeoLocationRes(BaseModel):
-  msg: str
-  reverse_geo_loc_data: dict
+class ReverseGeoLocationResponse(BaseModel):
+    msg: str
+    reverse_geo_loc_data: list

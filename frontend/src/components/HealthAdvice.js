@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Spinner } from "@nextui-org/react";
+import { motion } from "framer-motion";
 
 import { getHealthAdviceData } from "../utils/get-data";
 
@@ -54,10 +55,15 @@ export function HealthAdvice({ weatherData }) {
       {healthAdviceData && (
         <ul className="flex flex-col gap-y-12 text-lg">
           {healthAdviceData.map((adviceString, i) => (
-            <li key={i}>
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
               <strong>{extractAdviceHeading(adviceString)}:</strong>
               {extractAdviceContent(adviceString)}
-            </li>
+            </motion.li>
           ))}
         </ul>
       )}

@@ -9,4 +9,7 @@ Please fork this repository into your account, and clone the forked version onto
 To make development easier (at least for myself) I am using Docker and Docker Compose to automatically run both the frontend and the backend components.
 If you are unfamiliar with how to use these tools please read their documentation here
 
-On the other hand if you already know how to use Docker and Docker Compose then just run ```docker-compose up --build --watch```
+On the other hand if you already know how to use Docker and Docker Compose then just run 
+```sh
+docker-compose up --build --watch
+```

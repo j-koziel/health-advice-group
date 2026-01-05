@@ -21,7 +21,6 @@ export function Home() {
     setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
-      console.log("User's coordinates:", latitude, longitude);
 
       const weatherData = await getOpenWeatherMapData(
         `${config.weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=${preferredUnits}`

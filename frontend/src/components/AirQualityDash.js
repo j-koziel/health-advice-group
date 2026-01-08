@@ -1,5 +1,4 @@
-import { CircularProgress } from "@nextui-org/react";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip, CircularProgress, Chip } from "@nextui-org/react";
 
 import { AirQualityInfoModal } from "./AirQualityInfoModal";
 import { useDisclosure } from "@nextui-org/react";
@@ -149,12 +148,17 @@ export function AirQualityDash({
                 minValue={0}
                 maxValue={5}
                 classNames={airQualityIndexStyles}
-                label="AQI"
                 showValueLabel
                 color={airQualityColour(airQualityData.main.aqi, 1, 3, 5)}
                 formatOptions={{}}
               />
             </Tooltip>
+            <div className="mt-4 flex justify-center items-center gap-x-2">
+              <span className="text-2xl">AQI</span>
+              <Chip color="primary" className="">
+                {airQualityDescription(airQualityData.main.aqi)}
+              </Chip>
+            </div>
           </div>
           <div className="flex flex-col gap-y-4">
             <div className="flex">
@@ -231,12 +235,12 @@ export function AirQualityDash({
             </div>
           </div>
         </div>
-        <div className="mt-4 text-left">
+        <div className="mt-3 text-left">
           <p className="underline opacity-60 cursor-pointer" onClick={onOpen}>
             What do these numbers mean?
           </p>
         </div>
-        <div className="mt-4">{renderLocation()}</div>
+        {/* <div className="mt-4">{renderLocation()}</div> */}
         <AirQualityInfoModal isOpen={isOpen} onOpenChange={onOpenChange} />
       </div>
     );

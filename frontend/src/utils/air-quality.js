@@ -3,7 +3,7 @@ export const airQualityDescription = (aqi) => {
     return "error";
   }
 
-  const descriptions = ["good", "fair", "moderate", "poor", "very poor"];
+  const descriptions = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
   return descriptions[aqi - 1];
 };
 
